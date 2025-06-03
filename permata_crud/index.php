@@ -13,6 +13,9 @@ $result = $conn->query("SELECT * FROM jemaat");
 <body>
     <h2>Data Jemaat</h2>
     <a href="tambah.php">Tambah Jemaat</a>
+    <br><br>
+    <a href="export.php?type=excel" class="tambah-link">Export ke Excel</a>
+    <a href="export.php?type=pdf" class="tambah-link" target="_blank">Export ke PDF</a>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No</th><th>Nama</th><th>Alamat</th><th>Tgl Lahir</th><th>No Telp</th><th>Aksi</th>
