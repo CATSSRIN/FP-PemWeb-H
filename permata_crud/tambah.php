@@ -8,9 +8,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $tgl = $_POST['tanggal_lahir'];
     $telp = $_POST['no_telepon'];
 
+    // Check if connection exists
+    if (!$conn) {
+        die("Database connection failed: " . mysqli_connect_error());
+    }
+
+    // Prepare statement with error checking
     $stmt = $conn->prepare("INSERT INTO jemaat (nama, alamat, tanggal_lahir, no_telepon) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $nama, $alamat, $tgl, $telp);
-    $stmt->execute();
+    
+    if ($stmt === false) {
+        die("Prepare statement failed: " . $conn->error);
+    }
+
+    // Bind parameters
+    if (!$stmt->bind_param("ssss", $nama, $alamat, $tgl, $telp)) {
+        die("Binding parameters failed: " . $stmt->error);
+    }
+
+    // Execute statement
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    }
+
+    $stmt->close();
     header("Location: index.php");
     exit;
 }
