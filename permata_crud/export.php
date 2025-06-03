@@ -7,7 +7,7 @@ $result = $conn->query("SELECT * FROM jemaat");
 
 if ($type === 'excel') {
     header("Content-Type: application/vnd.ms-excel");
-    header("Content-Disposition: attachment; filename=jemaat_export.xls");
+    header("Content-Disposition: attachment; filename=jemaat_export.csv");
     echo "No\tNama\tAlamat\tTanggal Lahir\tNo Telp\n";
     $no = 1;
     while ($row = $result->fetch_assoc()) {
