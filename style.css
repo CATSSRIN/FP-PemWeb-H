@@ -170,7 +170,6 @@ body {
 .filter-btn .fa-chevron-down {
     font-size: 12px;
     transition: transform 0.3s ease;
-    /* Color will be inherited from .filter-btn text color */
 }
 
 .filter-btn.open .fa-chevron-down {
@@ -200,7 +199,7 @@ body {
     width: 100%;
     text-align: left;
     border: none;
-    background-color: transparent; /* Should inherit from dropdown-content, but explicit for clarity */
+    background-color: transparent;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -212,12 +211,12 @@ body {
 
 .filter-btn.active {
     background-color: var(--active-filter-bg);     /* USE VARIABLE */
-    color: var(--active-filter-text);            /* USE VARIABLE */
+    color: var(--active-filter-text);              /* USE VARIABLE */
     border-color: var(--active-filter-border);     /* USE VARIABLE */
 }
 
 .filter-btn.active .fa-chevron-down {
-    color: var(--active-filter-text);            /* USE VARIABLE */
+    color: var(--active-filter-text);              /* USE VARIABLE */
 }
 
 
@@ -234,23 +233,36 @@ body {
     border: 1px solid var(--border-color);   /* USE VARIABLE */
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Shadow might need adjustment for dark mode or a variable too */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* MODIFIED .card-image-placeholder RULE */
 .card-image-placeholder {
-    background-color: var(--image-placeholder-bg); /* USE VARIABLE */
+    background-color: var(--image-placeholder-bg);
+    width: 100%;
     height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* For centering placeholder icon */
+    align-items: center; /* For centering placeholder icon */
+    justify-content: center; /* For centering placeholder icon */
     position: relative;
-    color: var(--placeholder-icon-color); /* USE VARIABLE */
+    overflow: hidden; /* To contain the image */
+    color: var(--placeholder-icon-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+    /* Removed: object-fit: cover; (incorrect for div) */
+    /* Removed: display: block; (was overriding display: flex) */
 }
 
 .card-image-placeholder .image-icon {
     font-size: 50px;
+}
+
+/* ADDED: Rule for images within the placeholder */
+.card-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Scales image to fill, maintains aspect ratio, crops if needed */
+    display: block;    /* Good practice for images */
 }
 
 .bookmark-icon {
@@ -265,12 +277,10 @@ body {
     font-size: 16px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-/* To handle the active bookmark state in dark mode */
+
 .bookmark-icon.active-bookmark {
     background-color: var(--bookmark-bg-active, rgba(255, 80, 80, 0.7));
 }
-
-
 
 .price-tag {
     position: absolute;
@@ -289,11 +299,11 @@ body {
     margin-right: 2px;
 }
 
-.card-content {
+.card-content { /* This class is used for text details */
     padding: 15px;
 }
 
-.item-title {
+.item-title { /* This class is used for the main title in text details */
     font-size: 16px;
     font-weight: bold;
     margin-top: 0;
@@ -302,7 +312,7 @@ body {
     transition: color 0.3s ease;
 }
 
-.item-location {
+.item-location { /* This class is used for location text */
     font-size: 14px;
     color: var(--secondary-text-color); /* USE VARIABLE */
     margin-bottom: 0;
@@ -316,4 +326,3 @@ body {
     color: var(--icon-color); /* USE VARIABLE */
     transition: color 0.3s ease;
 }
-
