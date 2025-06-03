@@ -1,3 +1,25 @@
+<?php
+// Define an array of card data.
+// In a real application, this data might come from a database.
+$cards = [
+    [
+        'type' => 'image', // Custom type to differentiate
+        'img_src' => 'asset/gedung1.jpg',
+        'img_alt' => 'Gedung 1',
+        'leader' => 'Pdt. Krismas Imanta Barus, M.Th, LM',
+        'title' => 'Gereja Batak Karo Protestan (GBKP)',
+        'location' => 'Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226'
+    ],
+    [
+        'type' => 'placeholder', // Custom type
+        'placeholder_leader_prefix' => 'Dipimpin:',
+        'placeholder_leader' => 'Pak Sutrisno',
+        'title' => 'Ini nama gedung',
+        'location' => 'Lokasi Lain, Kota Lain'
+    ]
+    // Add more card data arrays here
+];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,32 +75,34 @@
         </nav>
 
         <main class="item-grid">
+            <?php foreach ($cards as $card): ?>
             <div class="item-card">
                 <div class="card-image-placeholder">
-                    <img src="asset/gedung1.jpg" alt="Gedung 1">
+                    <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
+                        <img src="<?php echo htmlspecialchars($card['img_src']); ?>" alt="<?php echo htmlspecialchars($card['img_alt']); ?>">
+                    <?php elseif ($card['type'] === 'placeholder'): ?>
+                        <i class="fas fa-image image-icon"></i>
+                        <?php if (!empty($card['placeholder_leader'])): ?>
+                        <div class="price-tag"> <?php if (!empty($card['placeholder_leader_prefix'])): ?>
+                                <span><?php echo htmlspecialchars($card['placeholder_leader_prefix']); ?></span>
+                            <?php endif; ?>
+                            <?php echo htmlspecialchars($card['placeholder_leader']); ?>
+                        </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <div class="bookmark-icon"><i class="far fa-bookmark"></i></div>
                 </div>
                 <div class="card-content">
-                    <p style="font-size: 0.9em; color: var(--secondary-text-color); margin-bottom: 4px; margin-top: 0;">Dipimpin: Pdt. Krismas Imanta Barus, M.Th, LM</p>
-                    <p class="item-title">Gereja Batak Karo Protestan (GBKP)</p>
-                    <p class="item-location"><i class="fas fa-map-marker-alt"></i> Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226</p>
+                    <?php if ($card['type'] === 'image' && !empty($card['leader'])): ?>
+                        <p style="font-size: 0.9em; color: var(--secondary-text-color); margin-bottom: 4px; margin-top: 0;">Dipimpin: <?php echo htmlspecialchars($card['leader']); ?></p>
+                    <?php endif; ?>
+                    <p class="item-title"><?php echo htmlspecialchars($card['title']); ?></p>
+                    <p class="item-location"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($card['location']); ?></p>
                 </div>
             </div>
-
-            <div class="item-card">
-                <div class="card-image-placeholder">
-                    <i class="fas fa-image image-icon"></i>
-                    <div class="bookmark-icon"><i class="far fa-bookmark"></i></div>
-                    <div class="price-tag">
-                        <span>Dipimpin:</span>Pak Sutrisno
-                    </div>
-                </div>
-                <div class="card-content">
-                    <p class="item-title">Ini nama gedung</p>
-                    <p class="item-location"><i class="fas fa-map-marker-alt"></i> Lokasi Lain, Kota Lain</p>
-                </div>
-            </div>
-        </main> </div>
+            <?php endforeach; ?>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
