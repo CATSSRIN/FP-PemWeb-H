@@ -26,7 +26,7 @@ $sqlTable = "CREATE TABLE IF NOT EXISTS jemaat (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nama VARCHAR(100) NOT NULL,
     alamat TEXT NOT NULL,
-    tgl_lahir DATE NOT NULL,
+    tanggal_lahir DATE NOT NULL,
     no_telepon VARCHAR(20) NOT NULL
 )";
 if ($conn->query($sqlTable) !== TRUE) {
