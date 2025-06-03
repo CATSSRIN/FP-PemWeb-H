@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'root';
 $pass = '';
-$dbname = 'permata';
+$dbname = 'permata_db';
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 
