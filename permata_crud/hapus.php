@@ -1,4 +1,5 @@
 <?php
+include 'koneksi.php';
 include 'db.php';
 $id = $_GET['id'];
 $conn->query("DELETE FROM jemaat WHERE id=$id");

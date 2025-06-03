@@ -1,4 +1,5 @@
 <?php
+include 'koneksi.php';
 include 'db.php';
 $result = $conn->query("SELECT * FROM jemaat");
 ?>
@@ -7,6 +8,7 @@ $result = $conn->query("SELECT * FROM jemaat");
 <html>
 <head>
     <title>Data Jemaat PERMATA</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h2>Data Jemaat</h2>

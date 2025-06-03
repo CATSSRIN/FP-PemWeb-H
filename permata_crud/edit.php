@@ -1,4 +1,5 @@
 <?php
+include 'koneksi.php';
 include 'db.php';
 $id = $_GET['id'];
 $data = $conn->query("SELECT * FROM jemaat WHERE id=$id")->fetch_assoc();
