@@ -8,11 +8,11 @@ Tugas Final project pemrograman web
 
 |Nama|Username|Bagian| 
 |----|--------|------|
-|Caezarlov Nugraha|[CATSSRIN](https://github.com/CATSSRIN)|-|
-|Deny Yusuf Marcheno|[DenyYusufMarcheno](https://github.com/DenyYusufMarcheno)|-|
-|Wildan Fikri Burhani|[burhaniwildan](https://github.com/burhaniwildan)|-|
-|Amsal Adrian Ginting|[amsaladrian](https://github.com/amsaladrian)|-|
-|Fajar Rahmad Jaya|[Fajar Rahmad Jaya](https://github.com/Fajar-RahmadJaya)|-|
+|Caezarlov Nugraha|[CATSSRIN](https://github.com/CATSSRIN)|Dashboard|
+|Deny Yusuf Marcheno|[DenyYusufMarcheno](https://github.com/DenyYusufMarcheno)|Penambahan, Pengeditan, dan Penghapus Data Jemaat|
+|Wildan Fikri Burhani|[burhaniwildan](https://github.com/burhaniwildan)|Tabel Data Jemaat (Filter & Search)|
+|Amsal Adrian Ginting|[amsaladrian](https://github.com/amsaladrian)|Login & Logout Pengurus|
+|Fajar Rahmad Jaya|[Fajar Rahmad Jaya](https://github.com/Fajar-RahmadJaya)|Export Data per Runggun|
 
 
 ## Ketentuan
