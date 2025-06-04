@@ -2,329 +2,336 @@
 
 /* Define Color Variables */
 :root {
-    /* Light Mode (Default) */
-    --bg-color: #f8f9fa;
-    --card-bg-color: #ffffff;
-    --text-color: #333;
-    --secondary-text-color: #777;
-    --icon-color: #555;
-    --placeholder-icon-color: #adb5bd;
-    --border-color: #e0e0e0;
-    --button-bg-color: #fff;
-    --button-border-color: #ddd;
-    --button-text-color: #333;
-    --button-hover-bg-color: #f0f0f0;
-    --header-bg-color: #f0f0f0;
-    --search-input-bg: transparent;
-    --search-icon-color: #888;
-    --filter-icon-wrapper-border: #ccc;
-    --image-placeholder-bg: #e9ecef;
-    --bookmark-bg: rgba(0, 0, 0, 0.4);
-    --bookmark-icon-color: white;
-    --price-tag-bg: rgba(0, 0, 0, 0.6);
-    --price-tag-text-color: white;
-    --dropdown-bg: #ffffff;
-    --dropdown-border: #ddd;
-    --dropdown-shadow: rgba(0,0,0,0.2);
-    --dropdown-item-hover-bg: #f1f1f1;
-    --active-filter-bg: #007bff;
-    --active-filter-text: white;
-    --active-filter-border: #007bff;
+  /* Light Mode (Default) */
+  --bg-color: #f8f9fa;
+  --card-bg-color: #ffffff;
+  --text-color: #333;
+  --secondary-text-color: #777;
+  --icon-color: #555;
+  --placeholder-icon-color: #adb5bd;
+  --border-color: #e0e0e0;
+  --button-bg-color: #fff;
+  --button-border-color: #ddd;
+  --button-text-color: #333;
+  --button-hover-bg-color: #f0f0f0;
+  --header-bg-color: #f0f0f0;
+  --search-input-bg: transparent;
+  --search-icon-color: #888;
+  --filter-icon-wrapper-border: #ccc;
+  --image-placeholder-bg: #e9ecef;
+  --bookmark-bg: rgba(0, 0, 0, 0.4);
+  --bookmark-icon-color: white;
+  --price-tag-bg: rgba(0, 0, 0, 0.6);
+  --price-tag-text-color: white;
+  --dropdown-bg: #ffffff;
+  --dropdown-border: #ddd;
+  --dropdown-shadow: rgba(0, 0, 0, 0.2);
+  --dropdown-item-hover-bg: #f1f1f1;
+  --active-filter-bg: #007bff;
+  --active-filter-text: white;
+  --active-filter-border: #007bff;
 }
 
 body.dark-mode {
-    /* Dark Mode */
-    --bg-color: #121212; /* Very dark grey, common for dark modes */
-    --card-bg-color: #1e1e1e; /* Darker grey for cards */
-    --text-color: #e0e0e0; /* Light grey for text */
-    --secondary-text-color: #a0a0a0; /* Slightly darker light grey */
-    --icon-color: #b0b0b0;
-    --placeholder-icon-color: #777;
-    --border-color: #333; /* Darker borders */
-    --button-bg-color: #2c2c2c;
-    --button-border-color: #444;
-    --button-text-color: #e0e0e0;
-    --button-hover-bg-color: #383838;
-    --header-bg-color: #1e1e1e;
-    --search-input-bg: transparent;
-    --search-icon-color: #aaa;
-    --filter-icon-wrapper-border: #444;
-    --image-placeholder-bg: #2a2a2a;
-    --bookmark-bg: rgba(255, 255, 255, 0.15); /* Lighter, semi-transparent for dark mode */
-    --bookmark-icon-color: #e0e0e0;
-    --price-tag-bg: rgba(0, 0, 0, 0.7); /* Can remain dark, or adjust */
-    --price-tag-text-color: #f0f0f0;
-    --dropdown-bg: #2c2c2c;
-    --dropdown-border: #444;
-    --dropdown-shadow: rgba(0,0,0,0.5); /* Darker shadow for dark mode */
-    --dropdown-item-hover-bg: #383838;
-    --active-filter-bg: #0056b3; /* Slightly darker blue for active filter */
-    --active-filter-text: #f0f0f0;
-    --active-filter-border: #0056b3;
+  /* Dark Mode */
+  --bg-color: #121212; /* Very dark grey, common for dark modes */
+  --card-bg-color: #1e1e1e; /* Darker grey for cards */
+  --text-color: #e0e0e0; /* Light grey for text */
+  --secondary-text-color: #a0a0a0; /* Slightly darker light grey */
+  --icon-color: #b0b0b0;
+  --placeholder-icon-color: #777;
+  --border-color: #333; /* Darker borders */
+  --button-bg-color: #2c2c2c;
+  --button-border-color: #444;
+  --button-text-color: #e0e0e0;
+  --button-hover-bg-color: #383838;
+  --header-bg-color: #1e1e1e;
+  --search-input-bg: transparent;
+  --search-icon-color: #aaa;
+  --filter-icon-wrapper-border: #444;
+  --image-placeholder-bg: #2a2a2a;
+  --bookmark-bg: rgba(
+    255,
+    255,
+    255,
+    0.15
+  ); /* Lighter, semi-transparent for dark mode */
+  --bookmark-icon-color: #e0e0e0;
+  --price-tag-bg: rgba(0, 0, 0, 0.7); /* Can remain dark, or adjust */
+  --price-tag-text-color: #f0f0f0;
+  --dropdown-bg: #2c2c2c;
+  --dropdown-border: #444;
+  --dropdown-shadow: rgba(0, 0, 0, 0.5); /* Darker shadow for dark mode */
+  --dropdown-item-hover-bg: #383838;
+  --active-filter-bg: #0056b3; /* Slightly darker blue for active filter */
+  --active-filter-text: #f0f0f0;
+  --active-filter-border: #0056b3;
 }
-
 
 /* General Body Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: var(--bg-color); /* USE VARIABLE */
-    color: var(--text-color);          /* USE VARIABLE */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: var(--bg-color); /* USE VARIABLE */
+  color: var(--text-color); /* USE VARIABLE */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 /* Header Section: Search Bar and Filter Icon */
 .header-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    background-color: var(--header-bg-color); /* USE VARIABLE */
-    padding: 10px 20px;
-    border-radius: 25px;
-    transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background-color: var(--header-bg-color); /* USE VARIABLE */
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
 }
 
 .search-bar {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .search-bar .search-icon {
-    margin-right: 10px;
-    color: var(--search-icon-color); /* USE VARIABLE */
-    transition: color 0.3s ease;
+  margin-right: 10px;
+  color: var(--search-icon-color); /* USE VARIABLE */
+  transition: color 0.3s ease;
 }
 
 .search-bar input[type="text"] {
-    border: none;
-    outline: none;
-    background-color: var(--search-input-bg); /* USE VARIABLE */
-    font-size: 16px;
-    width: 100%;
-    color: var(--text-color); /* USE VARIABLE for input text color */
-    transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
+  outline: none;
+  background-color: var(--search-input-bg); /* USE VARIABLE */
+  font-size: 16px;
+  width: 100%;
+  color: var(--text-color); /* USE VARIABLE for input text color */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 .search-bar input[type="text"]::placeholder {
-    color: var(--secondary-text-color); /* USE VARIABLE for placeholder text color */
+  color: var(
+    --secondary-text-color
+  ); /* USE VARIABLE for placeholder text color */
 }
 
-
 .filter-icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--filter-icon-wrapper-border); /* USE VARIABLE */
-    border-radius: 50%;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--filter-icon-wrapper-border); /* USE VARIABLE */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
 .filter-icon-wrapper .filter-icon {
-    color: var(--icon-color); /* USE VARIABLE */
-    font-size: 18px;
-    transition: color 0.3s ease;
+  color: var(--icon-color); /* USE VARIABLE */
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
-
 
 /* Filter Buttons */
 .filter-buttons {
-    margin-bottom: 25px;
-    display: flex;
-    gap: 10px;
-    position: relative;
+  margin-bottom: 25px;
+  display: flex;
+  gap: 10px;
+  position: relative;
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .filter-btn {
-    background-color: var(--button-bg-color); /* USE VARIABLE */
-    border: 1px solid var(--button-border-color); /* USE VARIABLE */
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--button-text-color); /* USE VARIABLE */
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  background-color: var(--button-bg-color); /* USE VARIABLE */
+  border: 1px solid var(--button-border-color); /* USE VARIABLE */
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--button-text-color); /* USE VARIABLE */
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .filter-btn:hover {
-    background-color: var(--button-hover-bg-color); /* USE VARIABLE */
+  background-color: var(--button-hover-bg-color); /* USE VARIABLE */
 }
 
 .filter-btn .fa-chevron-down {
-    font-size: 12px;
-    transition: transform 0.3s ease;
+  font-size: 12px;
+  transition: transform 0.3s ease;
 }
 
 .filter-btn.open .fa-chevron-down {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--dropdown-bg); /* USE VARIABLE */
-    min-width: 100%;
-    box-shadow: 0px 8px 16px 0px var(--dropdown-shadow); /* USE VARIABLE */
-    border: 1px solid var(--dropdown-border); /* USE VARIABLE */
-    border-radius: 8px;
-    z-index: 10;
-    margin-top: 5px;
-    max-height: 200px;
-    overflow-y: auto;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+  display: none;
+  position: absolute;
+  background-color: var(--dropdown-bg); /* USE VARIABLE */
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px var(--dropdown-shadow); /* USE VARIABLE */
+  border: 1px solid var(--dropdown-border); /* USE VARIABLE */
+  border-radius: 8px;
+  z-index: 10;
+  margin-top: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .dropdown-item {
-    color: var(--text-color); /* USE VARIABLE */
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    text-align: left;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--text-color); /* USE VARIABLE */
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dropdown-item:hover {
-    background-color: var(--dropdown-item-hover-bg); /* USE VARIABLE */
+  background-color: var(--dropdown-item-hover-bg); /* USE VARIABLE */
 }
 
 .filter-btn.active {
-    background-color: var(--active-filter-bg);     /* USE VARIABLE */
-    color: var(--active-filter-text);              /* USE VARIABLE */
-    border-color: var(--active-filter-border);     /* USE VARIABLE */
+  background-color: var(--active-filter-bg); /* USE VARIABLE */
+  color: var(--active-filter-text); /* USE VARIABLE */
+  border-color: var(--active-filter-border); /* USE VARIABLE */
 }
 
 .filter-btn.active .fa-chevron-down {
-    color: var(--active-filter-text);              /* USE VARIABLE */
+  color: var(--active-filter-text); /* USE VARIABLE */
 }
-
 
 /* Item Grid */
 .item-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 /* Item Card Styling */
 .item-card {
-    background-color: var(--card-bg-color); /* USE VARIABLE */
-    border: 1px solid var(--border-color);   /* USE VARIABLE */
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+  background-color: var(--card-bg-color); /* USE VARIABLE */
+  border: 1px solid var(--border-color); /* USE VARIABLE */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* MODIFIED .card-image-placeholder RULE */
 .card-image-placeholder {
-    background-color: var(--image-placeholder-bg);
-    width: 100%;
-    height: 200px;
-    display: flex; /* For centering placeholder icon */
-    align-items: center; /* For centering placeholder icon */
-    justify-content: center; /* For centering placeholder icon */
-    position: relative;
-    overflow: hidden; /* To contain the image */
-    color: var(--placeholder-icon-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    /* Removed: object-fit: cover; (incorrect for div) */
-    /* Removed: display: block; (was overriding display: flex) */
+  background-color: var(--image-placeholder-bg);
+  width: 100%;
+  height: 200px;
+  display: flex; /* For centering placeholder icon */
+  align-items: center; /* For centering placeholder icon */
+  justify-content: center; /* For centering placeholder icon */
+  position: relative;
+  overflow: hidden; /* To contain the image */
+  color: var(--placeholder-icon-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Removed: object-fit: cover; (incorrect for div) */
+  /* Removed: display: block; (was overriding display: flex) */
 }
 
 .card-image-placeholder .image-icon {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 /* ADDED: Rule for images within the placeholder */
 .card-image-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Scales image to fill, maintains aspect ratio, crops if needed */
-    display: block;    /* Good practice for images */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Scales image to fill, maintains aspect ratio, crops if needed */
+  display: block; /* Good practice for images */
 }
 
 .bookmark-icon {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: var(--bookmark-bg); /* USE VARIABLE */
-    color: var(--bookmark-icon-color);    /* USE VARIABLE */
-    padding: 8px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--bookmark-bg); /* USE VARIABLE */
+  color: var(--bookmark-icon-color); /* USE VARIABLE */
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .bookmark-icon.active-bookmark {
-    background-color: var(--bookmark-bg-active, rgba(255, 80, 80, 0.7));
+  background-color: var(--bookmark-bg-active, rgba(255, 80, 80, 0.7));
 }
 
 .price-tag {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    background-color: var(--price-tag-bg); /* USE VARIABLE */
-    color: var(--price-tag-text-color);    /* USE VARIABLE */
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background-color: var(--price-tag-bg); /* USE VARIABLE */
+  color: var(--price-tag-text-color); /* USE VARIABLE */
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .price-tag span {
-    margin-right: 2px;
+  margin-right: 2px;
 }
 
-.card-content { /* This class is used for text details */
-    padding: 15px;
+.card-content {
+  /* This class is used for text details */
+  padding: 15px;
 }
 
-.item-title { /* This class is used for the main title in text details */
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: var(--text-color); /* USE VARIABLE */
-    transition: color 0.3s ease;
+.item-title {
+  /* This class is used for the main title in text details */
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--text-color); /* USE VARIABLE */
+  transition: color 0.3s ease;
 }
 
-.item-location { /* This class is used for location text */
-    font-size: 14px;
-    color: var(--secondary-text-color); /* USE VARIABLE */
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s ease;
+.item-location {
+  /* This class is used for location text */
+  font-size: 14px;
+  color: var(--secondary-text-color); /* USE VARIABLE */
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
 }
 
 .item-location .fa-map-marker-alt {
-    margin-right: 6px;
-    color: var(--icon-color); /* USE VARIABLE */
-    transition: color 0.3s ease;
+  margin-right: 6px;
+  color: var(--icon-color); /* USE VARIABLE */
+  transition: color 0.3s ease;
 }
 .profile-container {
   position: absolute;
@@ -339,21 +346,24 @@ body {
   cursor: pointer;
 }
 
-.profile-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  width: 160px;
-}
+
 
 .profile-menu a {
   display: block;
   padding: 10px;
   text-decoration: none;
-  color: black;
+  color: white;
+}
+
+.profile-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: #222;
+  color: #fff;
+  border-radius: 8px;
+  min-width: 150px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }

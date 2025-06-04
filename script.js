@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Dropdown functionality ---
     // Close dropdown if clicked outside any dropdown area or filter button
-    window.addEventListener('click', function(event) {
+    window.addEventListener('click', function (event) {
         // If the click is not part of any dropdown's trigger or content
         // (No need to check for theme toggle button anymore)
         if (!event.target.closest('.dropdown') && !event.target.matches('.filter-btn, .filter-btn *')) {
@@ -131,4 +131,38 @@ function selectDropdownItem(itemElement, categoryName) {
         if (mainFilterButton) mainFilterButton.classList.remove('open');
         // console.log(`Closed dropdown content for ${categoryName} after selection.`);
     }
+    function toggleProfileMenu() {
+        var menu = document.getElementById('profileMenu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        // ... kode bookmark dan dropdown Anda ...
+    });
+
+    // Fungsi toggleProfileMenu di global scope!
+    function toggleProfileMenu() {
+        var menu = document.getElementById('profileMenu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    }
+
+    // Agar menu profil tertutup jika klik di luar
+    document.addEventListener('click', function (event) {
+        var profileBtn = document.querySelector('.profile-btn');
+        var profileMenu = document.getElementById('profileMenu');
+        if (!profileBtn.contains(event.target) && !profileMenu.contains(event.target)) {
+            profileMenu.style.display = 'none';
+        }
+    });
+
+    // ... fungsi closeAllDropdowns, toggleDropdown, selectDropdownItem, dst ...
+
+
 }

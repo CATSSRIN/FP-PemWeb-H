@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php';
+include 'permata_crud/db.php';
 
 if (isset($_POST['login'])) {
   $username = $_POST['username'];
@@ -11,7 +11,7 @@ if (isset($_POST['login'])) {
   if (mysqli_num_rows($result) == 1) {
     $_SESSION['login'] = true;
     $_SESSION['username'] = $username;
-    header("Location: ../"); // arahkan ke index.php di folder prototype
+    header("Location: index.php"); // arahkan ke index.php di folder prototype
     exit; // tambahkan exit agar script berhenti setelah redirect
   } else {
     $error = "Username atau password salah!";

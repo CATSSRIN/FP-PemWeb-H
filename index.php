@@ -35,18 +35,7 @@ $cards = [
 <body class="dark-mode">
     <link rel="stylesheet" href="style.css">
 
-    <div class="profile-container">
-        <div class="profile-btn" onclick="toggleProfileMenu()">
-            👤 Profil ▼
-        </div>
-        <div class="profile-menu" id="profileMenu">
-            <div style="padding: 10px; border-bottom: 1px solid #ccc;">
-                <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?>
-            </div>
-            <a href="profil.php">Edit Profil</a>
-            <a href="logout.php">Logout</a>
-        </div>
-    </div>
+    
 
     <div class="container">
         <header class="header-section">
@@ -57,6 +46,27 @@ $cards = [
             <div class="filter-icon-wrapper">
                 <i class="fas fa-sliders-h filter-icon"></i>
             </div>
+            <div class="profile-container">
+        <div class="profile-btn" onclick="toggleProfileMenu()">
+            👤 Profil ▼
+        </div>
+        <div class="profile-menu" id="profileMenu">
+            <div style="padding: 10px; border-bottom: 1px solid #ccc;">
+                <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?>
+            </div>
+            <a href="logout.php">Logout</a>
+        </div>
+    </div>
+    <script>
+        function toggleProfileMenu() {
+            var menu = document.getElementById('profileMenu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+    </script>
         </header>
 
         <nav class="filter-buttons">
