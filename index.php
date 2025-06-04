@@ -8,7 +8,8 @@ $cards = [
         'img_alt' => 'Gedung 1',
         'leader' => 'Pdt. Krismas Imanta Barus, M.Th, LM',
         'title' => 'Gereja Batak Karo Protestan (GBKP)',
-        'location' => 'Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226'
+        'location' => 'Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226',
+        'url' => 'permata_crud/index.php'
     ],
     [
         'type' => 'placeholder', // Custom type
@@ -74,33 +75,48 @@ $cards = [
             </div>
         </nav>
 
-        <main class="item-grid">
-            <?php foreach ($cards as $card): ?>
-            <div class="item-card">
-                <div class="card-image-placeholder">
-                    <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
-                        <img src="<?php echo htmlspecialchars($card['img_src']); ?>" alt="<?php echo htmlspecialchars($card['img_alt']); ?>">
-                    <?php elseif ($card['type'] === 'placeholder'): ?>
-                        <i class="fas fa-image image-icon"></i>
-                        <?php if (!empty($card['placeholder_leader'])): ?>
-                        <div class="price-tag"> <?php if (!empty($card['placeholder_leader_prefix'])): ?>
-                                <span><?php echo htmlspecialchars($card['placeholder_leader_prefix']); ?></span>
-                            <?php endif; ?>
-                            <?php echo htmlspecialchars($card['placeholder_leader']); ?>
-                        </div>
+<main class="item-grid">
+    <?php foreach ($cards as $card): ?>
+        <?php
+        // Check if a URL is set for this card
+        $isClickable = isset($card['url']) && !empty($card['url']);
+        if ($isClickable) {
+            // Start the anchor tag if the card is clickable
+            echo '<a href="' . htmlspecialchars($card['url']) . '" class="card-link">';
+        }
+        ?>
+        <div class="item-card">
+            <div class="card-image-placeholder">
+                <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
+                    <img src="<?php echo htmlspecialchars($card['img_src']); ?>" alt="<?php echo htmlspecialchars($card['img_alt']); ?>">
+                <?php elseif ($card['type'] === 'placeholder'): ?>
+                    <i class="fas fa-image image-icon"></i>
+                    <?php if (!empty($card['placeholder_leader'])): ?>
+                    <div class="price-tag">
+                        <?php if (!empty($card['placeholder_leader_prefix'])): ?>
+                            <span><?php echo htmlspecialchars($card['placeholder_leader_prefix']); ?></span>
                         <?php endif; ?>
+                        <?php echo htmlspecialchars($card['placeholder_leader']); ?>
+                    </div>
                     <?php endif; ?>
-                    <div class="bookmark-icon"><i class="far fa-bookmark"></i></div>
-                </div>
-                <div class="card-content">
-                    <?php if ($card['type'] === 'image' && !empty($card['leader'])): ?>
-                        <p style="font-size: 0.9em; color: var(--secondary-text-color); margin-bottom: 4px; margin-top: 0;">Dipimpin: <?php echo htmlspecialchars($card['leader']); ?></p>
-                    <?php endif; ?>
-                    <p class="item-title"><?php echo htmlspecialchars($card['title']); ?></p>
-                    <p class="item-location"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($card['location']); ?></p>
-                </div>
+                <?php endif; ?>
+                <div class="bookmark-icon"><i class="far fa-bookmark"></i></div>
             </div>
-            <?php endforeach; ?>
+            <div class="card-content">
+                <?php if ($card['type'] === 'image' && !empty($card['leader'])): ?>
+                    <p style="font-size: 0.9em; color: var(--secondary-text-color); margin-bottom: 4px; margin-top: 0;">Dipimpin: <?php echo htmlspecialchars($card['leader']); ?></p>
+                <?php endif; ?>
+                <p class="item-title"><?php echo htmlspecialchars($card['title']); ?></p>
+                <p class="item-location"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($card['location']); ?></p>
+            </div>
+        </div>
+        <?php
+        if ($isClickable) {
+            // Close the anchor tag if the card was clickable
+            echo '</a>';
+        }
+        ?>
+    <?php endforeach; ?>
         </main>
     </div>
 
