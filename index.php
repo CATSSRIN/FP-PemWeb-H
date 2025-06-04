@@ -23,6 +23,7 @@ $cards = [
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +31,23 @@ $cards = [
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body class="dark-mode">
+    <link rel="stylesheet" href="style.css">
+
+    <div class="profile-container">
+        <div class="profile-btn" onclick="toggleProfileMenu()">
+            👤 Profil ▼
+        </div>
+        <div class="profile-menu" id="profileMenu">
+            <div style="padding: 10px; border-bottom: 1px solid #ccc;">
+                <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?>
+            </div>
+            <a href="profil.php">Edit Profil</a>
+            <a href="logout.php">Logout</a>
+        </div>
+    </div>
+
     <div class="container">
         <header class="header-section">
             <div class="search-bar">
@@ -75,51 +92,55 @@ $cards = [
             </div>
         </nav>
 
-<main class="item-grid">
-    <?php foreach ($cards as $card): ?>
-        <?php
-        // Check if a URL is set for this card
-        $isClickable = isset($card['url']) && !empty($card['url']);
-        if ($isClickable) {
-            // Start the anchor tag if the card is clickable
-            echo '<a href="' . htmlspecialchars($card['url']) . '" class="card-link">';
-        }
-        ?>
-        <div class="item-card">
-            <div class="card-image-placeholder">
-                <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
-                    <img src="<?php echo htmlspecialchars($card['img_src']); ?>" alt="<?php echo htmlspecialchars($card['img_alt']); ?>">
-                <?php elseif ($card['type'] === 'placeholder'): ?>
-                    <i class="fas fa-image image-icon"></i>
-                    <?php if (!empty($card['placeholder_leader'])): ?>
-                    <div class="price-tag">
-                        <?php if (!empty($card['placeholder_leader_prefix'])): ?>
-                            <span><?php echo htmlspecialchars($card['placeholder_leader_prefix']); ?></span>
+        <main class="item-grid">
+            <?php foreach ($cards as $card): ?>
+                <?php
+                // Check if a URL is set for this card
+                $isClickable = isset($card['url']) && !empty($card['url']);
+                if ($isClickable) {
+                    // Start the anchor tag if the card is clickable
+                    echo '<a href="' . htmlspecialchars($card['url']) . '" class="card-link">';
+                }
+                ?>
+                <div class="item-card">
+                    <div class="card-image-placeholder">
+                        <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
+                            <img src="<?php echo htmlspecialchars($card['img_src']); ?>"
+                                alt="<?php echo htmlspecialchars($card['img_alt']); ?>">
+                        <?php elseif ($card['type'] === 'placeholder'): ?>
+                            <i class="fas fa-image image-icon"></i>
+                            <?php if (!empty($card['placeholder_leader'])): ?>
+                                <div class="price-tag">
+                                    <?php if (!empty($card['placeholder_leader_prefix'])): ?>
+                                        <span><?php echo htmlspecialchars($card['placeholder_leader_prefix']); ?></span>
+                                    <?php endif; ?>
+                                    <?php echo htmlspecialchars($card['placeholder_leader']); ?>
+                                </div>
+                            <?php endif; ?>
                         <?php endif; ?>
-                        <?php echo htmlspecialchars($card['placeholder_leader']); ?>
+                        <div class="bookmark-icon"><i class="far fa-bookmark"></i></div>
                     </div>
-                    <?php endif; ?>
-                <?php endif; ?>
-                <div class="bookmark-icon"><i class="far fa-bookmark"></i></div>
-            </div>
-            <div class="card-content">
-                <?php if ($card['type'] === 'image' && !empty($card['leader'])): ?>
-                    <p style="font-size: 0.9em; color: var(--secondary-text-color); margin-bottom: 4px; margin-top: 0;">Dipimpin: <?php echo htmlspecialchars($card['leader']); ?></p>
-                <?php endif; ?>
-                <p class="item-title"><?php echo htmlspecialchars($card['title']); ?></p>
-                <p class="item-location"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($card['location']); ?></p>
-            </div>
-        </div>
-        <?php
-        if ($isClickable) {
-            // Close the anchor tag if the card was clickable
-            echo '</a>';
-        }
-        ?>
-    <?php endforeach; ?>
+                    <div class="card-content">
+                        <?php if ($card['type'] === 'image' && !empty($card['leader'])): ?>
+                            <p style="font-size: 0.9em; color: var(--secondary-text-color); margin-bottom: 4px; margin-top: 0;">
+                                Dipimpin: <?php echo htmlspecialchars($card['leader']); ?></p>
+                        <?php endif; ?>
+                        <p class="item-title"><?php echo htmlspecialchars($card['title']); ?></p>
+                        <p class="item-location"><i class="fas fa-map-marker-alt"></i>
+                            <?php echo htmlspecialchars($card['location']); ?></p>
+                    </div>
+                </div>
+                <?php
+                if ($isClickable) {
+                    // Close the anchor tag if the card was clickable
+                    echo '</a>';
+                }
+                ?>
+            <?php endforeach; ?>
         </main>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
