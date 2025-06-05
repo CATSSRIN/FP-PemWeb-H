@@ -8,7 +8,7 @@ Tugas Final project pemrograman web
 
 |Nama|Username|Bagian| 
 |----|--------|------|
-|Caezarlov Nugraha|[CATSSRIN](https://github.com/CATSSRIN)|Halaman: Dashboard, pembayaran, pendataan jemaat|
+|Caezarlov Nugraha|[CATSSRIN](https://github.com/CATSSRIN)|Halaman: Dashboard, Pembayaran, Pendataan jemaat|
 |Deny Yusuf Marcheno|[DenyYusufMarcheno](https://github.com/DenyYusufMarcheno)|Penambahan, Pengeditan, dan Penghapus Data Jemaat|
 |Wildan Fikri Burhani|[burhaniwildan](https://github.com/burhaniwildan)|Tabel Data Jemaat (Filter & Search)|
 |Amsal Adrian Ginting|[amsaladrian](https://github.com/amsaladrian)|Login & Logout Pengurus|

@@ -208,8 +208,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
         <nav class="main-nav" id="mainNav">
             <ul>
-                <li><a href="#pendataan"><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
-                <li><a href="#donasi"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
+                <li><a href="#Pendataan"><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
+                <li><a href="../Donasi/index.php"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
                 <li><a href="#organisasi"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
                 <li><a href="#connected"><i class="fas fa-link"></i> Stay Connected</a></li>
                 </ul>

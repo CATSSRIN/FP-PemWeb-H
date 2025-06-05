@@ -1,0 +1,7 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(to right, #002366, lightcoral); /* This line creates the gradient */
+  color: var(--text-color); /* Should be using your text color variable */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

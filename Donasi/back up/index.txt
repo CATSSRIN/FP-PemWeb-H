@@ -1,0 +1,587 @@
+<?php
+// Mulai session jika belum dimulai (diperlukan untuk $_SESSION['username'])
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - Halaman Utama</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome untuk ikon header dan konten -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Root variables */
+        :root {
+            --text-color: #333; /* Default text color */
+        }
+
+        /* Global Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #002366, lightcoral); /* Gradient background */
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            padding-top: 80px; /* Add padding to push content below sticky header, adjust if header height changes */
+        }
+
+        /* --- Styling Header --- */
+        .app-header {
+            background-color: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: fixed; /* Changed to fixed to ensure it's always at the top */
+            top: 0;
+            left: 0;
+            right: 0; /* Ensures header spans full width */
+            z-index: 1000;
+            min-height: 60px; /* Original min-height */
+            height: 60px; /* Explicit height for consistent padding-top on body */
+        }
+
+        .app-header .logo {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .app-header .logo a {
+            color: white;
+            text-decoration: none;
+        }
+        .app-header .logo a i {
+            margin-right: 8px;
+        }
+
+        .main-nav ul, .user-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav li, .user-nav li {
+            margin-left: 15px;
+        }
+
+        .main-nav a, .user-nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 0.85em;
+            padding: 8px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .main-nav a:hover,
+        .user-nav a:hover,
+        .user-nav .dropdown > a:hover {
+            background-color: #555;
+        }
+
+        .main-nav a i, .user-nav a i {
+            margin-right: 6px;
+            font-size: 1em;
+        }
+
+        .user-nav .language-switcher i, .user-nav .profile-icon {
+             font-size: 1.1em;
+        }
+        .user-nav .fa-caret-down {
+            font-size: 0.8em;
+            margin-left: 4px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            right: 0;
+            top: 100%;
+        }
+
+        .dropdown-content a, .dropdown-content div {
+            color: black;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9em;
+            border-bottom: 1px solid #eee;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        /* --- Styling Konten (Profile Card & Lainnya) --- */
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto; /* Center the container */
+            padding: 20px; /* Add some padding around the content */
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #333;
+        }
+
+        .profile-card h3, .profile-card p {
+            color: #333;
+        }
+        .profile-card .text-muted {
+            color: #6c757d !important;
+        }
+
+        .payment-option {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0; /* Adjusted margin */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+         .payment-option:not(:last-child) { /* ensure consistent margin between stacked options */
+            margin-bottom: 15px;
+        }
+
+
+        .payment-option:hover {
+            border-color: #002366;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 35, 102, 0.2);
+        }
+
+        .payment-option.selected {
+            border-color: #002366;
+            background-color: rgba(0, 35, 102, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #002366 0%, #003399 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 35, 102, 0.3);
+        }
+
+        .btn-outline-secondary {
+            color: #002366;
+            border-color: #002366;
+            border-radius: 25px;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #002366;
+            color: white;
+            border-color: #002366;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, rgba(0, 35, 102, 0.1) 0%, rgba(0, 51, 153, 0.1) 100%);
+            border: 1px solid rgba(0, 35, 102, 0.2);
+            color: #002366;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(25, 135, 84, 0.1) 100%);
+            border: 1px solid rgba(40, 167, 69, 0.2);
+            color: #155724;
+        }
+
+        .alert-info i, .alert-success i, .btn-primary i, .btn-outline-secondary i {
+            color: inherit;
+        }
+        .btn-primary i {
+            color: white;
+        }
+         .profile-card .bg-success {
+            background-color: #28a745 !important;
+        }
+
+        /* --- Responsif --- */
+        @media (max-width: 992px) {
+            .app-header {
+                /* Ensure mobile header still allows content to be seen */
+                /* height: auto; /* Allow height to adjust if needed */
+            }
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px; /* Position below the fixed header */
+                left: 0;
+                width: 100%;
+                background-color: #333;
+                padding: 10px 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add shadow for better separation */
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .main-nav li {
+                margin: 10px 20px;
+                width: calc(100% - 40px);
+            }
+            .main-nav a {
+                justify-content: center;
+            }
+
+            .menu-toggle {
+                display: block;
+                order: -1;
+                margin-right: auto;
+            }
+            .app-header .logo {
+                /* Adjust logo position if menu-toggle pushes it */
+                position: absolute; /* Take logo out of flow */
+                left: 50%;
+                transform: translateX(-50%); /* Center the logo */
+                margin-left: 0; /* Reset margin if any */
+            }
+             .user-nav {
+                margin-left: auto; /* Push user-nav to the right */
+            }
+
+
+            .user-nav li {
+                margin-left: 10px;
+            }
+            .user-nav a {
+                font-size: 0.8em;
+                padding: 6px 8px;
+            }
+            .user-nav a i {
+                font-size: 0.9em;
+            }
+            body {
+                padding-top: 60px; /* Ensure padding matches header height */
+            }
+        }
+
+         @media (max-width: 768px) {
+            .app-header .logo {
+                /* font-size: 1.1em; /* Further reduce logo size if needed */
+                /* Consider hiding logo text and only showing icon if space is very limited */
+            }
+            /* Further adjustments for very small screens */
+            .payment-option {
+                padding: 15px; /* Reduce padding on small screens */
+            }
+             .app-header .logo {
+                font-size: 1.1em;
+                /* Optionally hide text part of logo on very small screens */
+                /* display: flex; align-items: center; */
+            }
+            .app-header .logo span { /* Assuming your logo text is in a span */
+                /* display: none; */
+            }
+        }
+         @media (max-width: 480px) {
+            .app-header .logo {
+                display: none; /* Hide logo entirely on very small screens if too cluttered */
+            }
+            .menu-toggle {
+                margin-right: 10px; /* Adjust if logo is hidden */
+            }
+             .user-nav a {
+                font-size: 0.75em; /* Smaller font for user nav */
+                padding: 5px 7px;
+            }
+            .user-nav .language-switcher span { /* Hide "Bahasa" text */
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="logo">
+             <!-- Pastikan path ke index.php di root folder (FP-PEMWEB-H2) sudah benar -->
+            <a href="<?php echo dirname($_SERVER['PHP_SELF']) === '/FP-PEMWEB-H2/Pendataan_jemaat' ? '../index.php' : 'index.php'; ?>"><i class="fas fa-church"></i> <span>Nama Gereja</span></a>
+        </div>
+
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <!-- Sesuaikan path jika index.php ini ada di dalam subfolder dari FP-PEMWEB-H2 -->
+                <li><a href="<?php echo dirname($_SERVER['PHP_SELF']) === '/FP-PEMWEB-H2/Pendataan_jemaat' ? 'index.php' : 'Pendataan_jemaat/index.php'; ?>"><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
+                <li><a href="#donasi"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
+                <li><a href="#organisasi"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
+                <li><a href="#connected"><i class="fas fa-link"></i> Stay Connected</a></li>
+            </ul>
+        </nav>
+
+        <nav class="user-nav">
+            <ul>
+                <li class="dropdown">
+                    <a href="#" class="language-switcher" onclick="return false;" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-globe"></i> <span>Bahasa</span> <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="?lang=id">Indonesia</a>
+                        <a href="?lang=en">English</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#notifikasi" aria-label="Notifikasi">
+                        <i class="fas fa-bell"></i> <span class="sr-only">Notifikasi</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" onclick="return false;" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle profile-icon"></i> <span class="sr-only">Profil Pengguna</span> <i class="fas fa-caret-down"></i>
+                    </a>
+                     <div class="dropdown-content">
+                        <div style="padding: 10px 14px; border-bottom: 1px solid #ccc; font-weight: bold;">
+                            <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
+                        </div>
+                        <a href="#lihat-profil">Lihat Profil</a>
+                        <a href="#pengaturan">Pengaturan</a>
+                        <!-- Sesuaikan path logout.php jika perlu -->
+                        <a href="<?php echo dirname($_SERVER['PHP_SELF']) === '/FP-PEMWEB-H2/Pendataan_jemaat' ? '../logout.php' : 'logout.php'; ?>">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Konten Utama dari index.php yang lama (profile-card) -->
+    <div class="container main-container">
+        <div class="profile-card">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3"
+                         style="width: 60px; height: 60px;">
+                        <i class="fas fa-credit-card fa-lg text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="mb-1">Pembayaran</h3>
+                        <p class="text-muted mb-0">Pilih metode pembayaran</p>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="alert alert-info" id="activePaymentAlert">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Tagihan Aktif:</strong> <span id="activeBillText">Memuat informasi tagihan...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="paymentMethodsContainer" class="mb-4">
+                    <!-- Payment methods will be loaded here by JavaScript -->
+                </div>
+
+                <div id="paymentSuccessAlert" class="alert alert-success d-none mb-4">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <span id="successMessage"></span>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary btn-lg" id="payButton" disabled onclick="processPayment()">
+                        <i class="fas fa-credit-card me-2"></i>Bayar Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // --- Script untuk Header (Menu Toggle) ---
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                const isExpanded = mainNav.classList.contains('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+            });
+        }
+
+        // --- Script untuk Konten (Profile Card Payment) ---
+        let selectedPaymentMethod = null;
+        // Initialize billsData directly with static data instead of using loadBillsData function
+        let billsData = [
+            { id: 1, month: "", amount: 2500, dueDate: '', status: 'unpaid', paidDate: null },
+            { id: 2, month: 'Mei 2025', amount: 1200000, dueDate: '2025-05-31', status: 'paid', paidDate: '2025-05-28' }
+        ];
+
+        // The loadBillsData function has been removed.
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+        }
+
+        function formatDisplayDate(dateString) {
+            if (!dateString) return '-';
+            const [year, month, day] = dateString.split('-');
+            const dateObj = new Date(year, month - 1, day);
+            return dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        function updatePaymentStatus() {
+            const activeBill = billsData.find(bill => bill.status === 'unpaid');
+            const activeBillText = document.getElementById('activeBillText');
+            const payButton = document.getElementById('payButton');
+            const paymentMethodsContainer = document.getElementById('paymentMethodsContainer');
+            const activePaymentAlert = document.getElementById('activePaymentAlert');
+
+            if (activeBill) {
+                activePaymentAlert.classList.remove('d-none');
+                activeBillText.innerHTML = `<strong>${activeBill.month}</strong> - ${formatCurrency(activeBill.amount)}, ${formatDisplayDate(activeBill.dueDate)}`;
+                loadPaymentMethods();
+                payButton.disabled = selectedPaymentMethod === null;
+            } else {
+                activePaymentAlert.classList.add('d-none');
+                paymentMethodsContainer.innerHTML = '<div class="text-center"><p class="text-muted">Semua tagihan sudah lunas.</p></div>';
+                payButton.disabled = true;
+                selectedPaymentMethod = null;
+            }
+        }
+
+        function loadPaymentMethods() {
+            const container = document.getElementById('paymentMethodsContainer');
+            container.innerHTML = '';
+            const payButton = document.getElementById('payButton');
+
+            const methods = [
+                { name: 'Transfer Bank BCA', icon: 'fa-university', details: 'No. Rek: 123-456-7890 a/n Kosan' },
+                { name: 'Virtual Account Mandiri', icon: 'fa-credit-card', details: 'VA: 8800123456789' },
+                { name: 'QRIS', icon: 'fa-wallet', details: 'Scan QR Code di kantor pengelola' },
+                { name: 'GoPay', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi GoPay' },
+                { name: 'OVO', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi OVO' },
+                { name: 'DANA', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi DANA' }
+            ];
+
+            const row = document.createElement('div');
+            row.className = 'row';
+
+            methods.forEach(method => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-4 mb-3';
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'payment-option text-center h-100 d-flex flex-column justify-content-center';
+                optionDiv.innerHTML = `
+                    <h5><i class="fas ${method.icon} me-2"></i>${method.name}</h5>
+                    <p class="small text-muted mb-0">${method.details}</p>
+                `;
+                optionDiv.onclick = () => {
+                    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+                    optionDiv.classList.add('selected');
+                    selectedPaymentMethod = method.name;
+                    payButton.disabled = false;
+                };
+                col.appendChild(optionDiv);
+                row.appendChild(col);
+            });
+            container.appendChild(row);
+        }
+
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                // Ganti alert dengan UI yang lebih baik jika diinginkan
+                alert('Silakan pilih metode pembayaran terlebih dahulu.');
+                return;
+            }
+
+            const billToPay = billsData.find(bill => bill.status === 'unpaid');
+            if (billToPay) {
+                billToPay.status = 'paid';
+                const today = new Date();
+                billToPay.paidDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                localStorage.setItem('billsData', JSON.stringify(billsData));
+
+                const successAlert = document.getElementById('paymentSuccessAlert');
+                const successMessage = document.getElementById('successMessage');
+                successMessage.textContent = `Donasi ${billToPay.month} telah dikenakan admin sebesar ${formatCurrency(billToPay.amount)} dengan metode ${selectedPaymentMethod} berhasil!`;
+                successAlert.classList.remove('d-none');
+                document.getElementById('activePaymentAlert').classList.add('d-none');
+
+                selectedPaymentMethod = null;
+                updatePaymentStatus();
+
+                setTimeout(() => {
+                     successAlert.classList.add('d-none');
+                }, 5000);
+
+            } else {
+                 // Ganti alert dengan UI yang lebih baik jika diinginkan
+                alert('Tidak ada tagihan yang perlu dibayar.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // loadBillsData(); // Call to removed function is removed
+            updatePaymentStatus(); // This will now use the statically defined billsData
+        });
+    </script>
+</body>
+</html>
