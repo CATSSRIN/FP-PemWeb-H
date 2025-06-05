@@ -7,24 +7,28 @@ $cards = [
         'type' => 'image', // Custom type to differentiate
         'img_src' => 'asset/gedung1.jpg',
         'img_alt' => 'Gedung 1',
-        'leader' => 'Pdt. Krismas Imanta Barus, M.Th, LM',
+        'leader' => 'https://www.instagram.com/permatargsurabaya',
         'title' => 'Gereja Batak Karo Protestan (GBKP)',
         'location' => 'Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226',
         'url' => 'permata_crud/index.php'
     ],
     [
-        'type' => 'placeholder', // Custom type
-        'placeholder_leader_prefix' => 'Dipimpin:',
-        'placeholder_leader' => 'Pak Sutrisno',
-        'title' => 'Ini nama gedung',
-        'location' => 'Lokasi Lain, Kota Lain'
+        'type' => 'image', // Or 'placeholder'
+        'img_src' => 'asset/gedung2.jpg', // Replace if 'image' type
+        'img_alt' => 'Gedung 2',
+        'leader' => 'https://www.instagram.com/permatasemarang/',
+        'title' => 'GBKP Runggun Semarang',
+        'location' => 'Jl. Semeru Dalam I No.5, Karangrejo, Kec. Gajahmungkur, Kota Semarang, Jawa Tengah 50231',
+        'url' => 'permata_crud2.php' // Optional: link to a detail page
     ],
         [
-        'type' => 'placeholder',
-        'placeholder_leader_prefix' => 'Status:',
-        'placeholder_leader' => 'Segera Dibangun',
-        'title' => 'Proyek Kartu Baru 3',
-        'location' => 'Lokasi Proyek Baru 3 (Misal: Surabaya Timur)'
+        'type' => 'image', // Or 'placeholder'
+        'img_src' => 'asset/gedung3.jpg', // Replace if 'image' type
+        'img_alt' => 'Gedung 3',
+        'leader' => 'https://www.instagram.com/permatacijantung/',
+        'title' => 'GBKP Runggun Cijantung',
+        'location' => 'RT.1/RW.2, Cijantung, Pasar Rebo, East Jakarta City, Jakarta 13770',
+        'url' => 'permata_crud3.php' // Optional: link to a detail page
         // 'url' => 'detail_proyek3.php' // Optional for placeholders too
     ],
     [
@@ -151,7 +155,7 @@ $cards = [
                     <div class="card-content">
                         <?php if ($card['type'] === 'image' && !empty($card['leader'])): ?>
                             <p style="font-size: 0.9em; color: var(--secondary-text-color); margin-bottom: 4px; margin-top: 0;">
-                                Dipimpin: <?php echo htmlspecialchars($card['leader']); ?></p>
+                                Contact: <?php echo htmlspecialchars($card['leader']); ?></p>
                         <?php endif; ?>
                         <p class="item-title"><?php echo htmlspecialchars($card['title']); ?></p>
                         <p class="item-location"><i class="fas fa-map-marker-alt"></i>
