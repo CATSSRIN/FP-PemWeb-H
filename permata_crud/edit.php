@@ -1,6 +1,7 @@
 <?php
 include 'koneksi.php';
 include 'db.php';
+
 $id = $_GET['id'];
 $data = $conn->query("SELECT * FROM jemaat WHERE id=$id")->fetch_assoc();
 
@@ -18,12 +19,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-<h2>Edit Jemaat</h2>
-<form method="POST">
-    Nama: <input type="text" name="nama" value="<?= $data['nama'] ?>" required><br>
-    Alamat: <textarea name="alamat" required><?= $data['alamat'] ?></textarea><br>
-    Tanggal Lahir: <input type="date" name="tanggal_lahir" value="<?= $data['tanggal_lahir'] ?>"><br>
-    No Telp: <input type="text" name="no_telepon" value="<?= $data['no_telepon'] ?>"><br>
-    <button type="submit">Update</button>
-</form>
-<a href="index.php">Kembali</a>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Jemaat</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h2>Edit Jemaat</h2>
+    <form method="POST">
+        <label>Nama:</label>
+        <input type="text" name="nama" value="<?= htmlspecialchars($data['nama']) ?>" required>
+
+        <label>Alamat:</label>
+        <textarea name="alamat" required><?= htmlspecialchars($data['alamat']) ?></textarea>
+
+        <label>Tanggal Lahir:</label>
+        <input type="date" name="tanggal_lahir" value="<?= $data['tanggal_lahir'] ?>">
+
+        <label>No Telp:</label>
+        <input type="text" name="no_telepon" value="<?= htmlspecialchars($data['no_telepon']) ?>">
+
+        <button type="submit">Update</button>
+    </form>
+    <a href="index.php" class="back-link">Kembali</a>
+</div>
+</body>
+</html>

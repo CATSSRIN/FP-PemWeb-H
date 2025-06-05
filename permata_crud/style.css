@@ -41,6 +41,40 @@ table {
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  table th {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  table td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  table td::before {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #555;
+    content: attr(data-label);
+  }
+
+  form {
+    padding: 20px;
+    max-width: 100%;
+  }
+}
+
 table th, table td {
   padding: 12px 15px;
   border: 1px solid #ddd;
@@ -132,4 +166,97 @@ a.back-link {
 
 a.back-link:hover {
   text-decoration: underline;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 5px 0;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+a, input[type="submit"], .btn {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Umum */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container Utama */
+.container {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Judul Halaman */
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+/* Label Form */
+form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Input & Textarea */
+form input[type="text"],
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Tombol Simpan */
+form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Link Kembali */
+a.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+a.back-link:hover {
+    text-decoration: underline;
 }
