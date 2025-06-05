@@ -17,6 +17,23 @@ $cards = [
         'placeholder_leader' => 'Pak Sutrisno',
         'title' => 'Ini nama gedung',
         'location' => 'Lokasi Lain, Kota Lain'
+    ],
+        [
+        'type' => 'placeholder',
+        'placeholder_leader_prefix' => 'Status:',
+        'placeholder_leader' => 'Segera Dibangun',
+        'title' => 'Proyek Kartu Baru 3',
+        'location' => 'Lokasi Proyek Baru 3 (Misal: Surabaya Timur)'
+        // 'url' => 'detail_proyek3.php' // Optional for placeholders too
+    ],
+    [
+        'type' => 'placeholder', // Or 'placeholder'
+        'img_src' => 'asset/new_image_3.jpg', // Replace if 'image' type
+        'img_alt' => 'Deskripsi Gambar Baru 4',
+        'leader' => 'Nama Pemimpin/Pengelola Baru 4',
+        'title' => 'Judul Kartu Baru 4 (Misal: Klenteng Sanggar Agung)',
+        'location' => 'Lokasi Baru 4 (Misal: Kenjeran, Surabaya)',
+        'url' => 'detail_klenteng.php' // Optional: link to a detail page
     ]
     // Add more card data arrays here
 ];
