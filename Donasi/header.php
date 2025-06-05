@@ -203,7 +203,7 @@ if (session_status() == PHP_SESSION_NONE) {
         </button>
 
         <div class="logo">
-            <a href="../index.php"><i class="fas fa-church"></i> Nama Gereja</a>
+            <a href="../index.php"><i class="fas fa-church"></i> Permata GBKP</a>
         </div>
 
         <nav class="main-nav" id="mainNav">

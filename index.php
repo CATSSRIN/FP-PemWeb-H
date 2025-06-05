@@ -147,7 +147,7 @@
 
     <header class="app-header">
         <div class="logo">
-            <a href="#" style="color: white; text-decoration: none;"><i class="fas fa-church"></i> Nama Gereja</a>
+            <a href="#" style="color: white; text-decoration: none;"><i class="fas fa-church"></i> Permata GBKP</a>
         </div>
 
         <nav class="main-nav">

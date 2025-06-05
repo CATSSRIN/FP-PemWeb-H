@@ -350,7 +350,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
         <div class="logo">
             <!-- Assuming index.php is in the root of your project or FP-PEMWEB-H2 -->
-            <a href="../index.php"><i class="fas fa-church"></i> <span>Nama Gereja</span></a>
+            <a href="../index.php"><i class="fas fa-church"></i> <span>Permata GBKP</span></a>
         </div>
 
         <nav class="main-nav" id="mainNav">
