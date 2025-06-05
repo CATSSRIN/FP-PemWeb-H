@@ -131,7 +131,14 @@ body {
   border: 1px solid var(--filter-icon-wrapper-border); /* USE VARIABLE */
   border-radius: 50%;
   cursor: pointer;
-  transition: border-color 0.3s ease;
+  /* MODIFIED: Added background-color to the transition */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* ADD THIS NEW RULE for the hover effect */
+.filter-icon-wrapper:hover {
+  background-color: var(--button-hover-bg-color);
+
 }
 
 .filter-icon-wrapper .filter-icon {
@@ -170,6 +177,8 @@ body {
 
 .filter-btn:hover {
   background-color: var(--button-hover-bg-color); /* USE VARIABLE */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* A more pronounced shadow */
+  transform: translateY(-5px); /* Optional: Lifts the card up slightly for a 3D effect */
 }
 
 .filter-btn .fa-chevron-down {
