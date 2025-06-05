@@ -72,9 +72,9 @@ body.dark-mode {
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background-color: var(--bg-color); /* USE VARIABLE */
-  color: var(--text-color); /* USE VARIABLE */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  background: linear-gradient(to right, #002366, lightcoral); /* This line creates the gradient */
+  color: var(--text-color); /* Should be using your text color variable */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -233,12 +233,23 @@ body {
 
 /* Item Card Styling */
 .item-card {
-  background-color: var(--card-bg-color); /* USE VARIABLE */
-  border: 1px solid var(--border-color); /* USE VARIABLE */
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  background-color: var(--card-bg-color); /* USE VARIABLE */ /* */
+  border: 1px solid var(--border-color); /* USE VARIABLE */ /* */
+  border-radius: 12px; /* */
+  overflow: hidden; /* */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* */
+  /* MODIFIED: Added box-shadow and transform to the transition property */
+  transition: 
+    background-color    0.2s ease, 
+    border-color        0.2s ease, 
+    box-shadow          0.2s ease, 
+    transform           0.2s ease;
+}
+
+/* ADD THIS NEW RULE */
+.item-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* A more pronounced shadow */
+  transform: translateY(-5px); /* Optional: Lifts the card up slightly for a 3D effect */
 }
 
 /* MODIFIED .card-image-placeholder RULE */
@@ -346,8 +357,6 @@ body {
   cursor: pointer;
 }
 
-
-
 .profile-menu a {
   display: block;
   padding: 10px;
@@ -367,3 +376,5 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 100;
 }
+
+/* REMOVED: Extra closing curly brace that was at the end of the original file */
