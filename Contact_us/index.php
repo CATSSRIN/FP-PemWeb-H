@@ -390,11 +390,12 @@ if (session_status() == PHP_SESSION_NONE) {
                             <h5 class="mb-3">Informasi Kontak</h5>
                             <div class="contact-info-item">
                                 <i class="fas fa-map-marker-alt me-3"></i>
-                                <span>Jl. Gereja No. 123, Kota Harapan, 54321</span>
+                                <span>Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226</span>
                             </div>
                             <div class="contact-info-item">
                                 <i class="fas fa-phone-alt me-3"></i>
-                                <span>(021) 123-4567</span>
+                                <span>083171752088 (Loren)
+                                        <br> 082132281003 (Eginta)</span>
                             </div>
                             <div class="contact-info-item">
                                 <i class="fas fa-envelope me-3"></i>
