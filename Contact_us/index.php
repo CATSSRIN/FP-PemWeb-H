@@ -401,7 +401,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <span>kontak@permatagbkp.org</span>
                             </div>
                             <div class="mt-4">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322922!2d106.819546314769!3d-6.194741995514931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f42dabe0d931%3A0x4642b2fe16b0b230!2sNational%20Monument!5e0!3m2!1sen!2sid!4v1647332213813!5m2!1sen!2sid" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7915.243375410588!2d112.68013549357909!3d-7.283812899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fd004cb06ecf%3A0x1a1e4a50b18e6182!2sGBKP%20Runggun%20Surabaya!5e0!3m2!1sen!2sid!4v1749183183111!5m2!1sen!2sid" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                         </div>
                         <div class="col-lg-6">
