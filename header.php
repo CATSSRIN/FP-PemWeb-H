@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,19 +12,22 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <style>
         /* Styling Dasar untuk Header */
-        body { /* Sebaiknya ini ada di CSS global Anda */
+        body {
+            /* Sebaiknya ini ada di CSS global Anda */
             margin: 0;
             font-family: sans-serif;
         }
 
         .app-header {
-            background-color: #333; /* Warna latar belakang header */
-            padding: 10px 20px;
+            background-color: #333;
+            /* Warna latar belakang header */
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
-            position: sticky; /* Membuat header tetap di atas saat scroll */
+            position: sticky;
+            /* Membuat header tetap di atas saat scroll */
             top: 0;
             z-index: 1000;
             min-height: 60px;
@@ -33,15 +37,18 @@ if (session_status() == PHP_SESSION_NONE) {
             font-size: 1.3em;
             font-weight: bold;
         }
+
         .app-header .logo a {
             color: white;
             text-decoration: none;
         }
+
         .app-header .logo a i {
             margin-right: 8px;
         }
 
-        .main-nav ul, .user-nav ul {
+        .main-nav ul,
+        .user-nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
@@ -49,11 +56,13 @@ if (session_status() == PHP_SESSION_NONE) {
             align-items: center;
         }
 
-        .main-nav li, .user-nav li {
+        .main-nav li,
+        .user-nav li {
             margin-left: 15px;
         }
 
-        .main-nav a, .user-nav a {
+        .main-nav a,
+        .user-nav a {
             color: white;
             text-decoration: none;
             display: flex;
@@ -64,20 +73,23 @@ if (session_status() == PHP_SESSION_NONE) {
             transition: background-color 0.3s ease;
         }
 
-        .main-nav a:hover, 
+        .main-nav a:hover,
         .user-nav a:hover,
-        .user-nav .dropdown > a:hover {
+        .user-nav .dropdown>a:hover {
             background-color: #555;
         }
 
-        .main-nav a i, .user-nav a i {
+        .main-nav a i,
+        .user-nav a i {
             margin-right: 6px;
             font-size: 1em;
         }
 
-        .user-nav .language-switcher i, .user-nav .profile-icon {
-             font-size: 1.1em;
+        .user-nav .language-switcher i,
+        .user-nav .profile-icon {
+            font-size: 1.1em;
         }
+
         .user-nav .fa-caret-down {
             font-size: 0.8em;
             margin-left: 4px;
@@ -94,14 +106,15 @@ if (session_status() == PHP_SESSION_NONE) {
             position: absolute;
             background-color: #f9f9f9;
             min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
             border-radius: 5px;
             right: 0;
             top: 100%;
         }
 
-        .dropdown-content a, .dropdown-content div {
+        .dropdown-content a,
+        .dropdown-content div {
             color: black;
             padding: 10px 14px;
             text-decoration: none;
@@ -109,6 +122,7 @@ if (session_status() == PHP_SESSION_NONE) {
             font-size: 0.9em;
             border-bottom: 1px solid #eee;
         }
+
         .dropdown-content a:last-child {
             border-bottom: none;
         }
@@ -121,7 +135,8 @@ if (session_status() == PHP_SESSION_NONE) {
             display: block;
         }
 
-        .sr-only { /* Untuk menyembunyikan teks secara visual tapi tetap aksesibel */
+        .sr-only {
+            /* Untuk menyembunyikan teks secara visual tapi tetap aksesibel */
             position: absolute;
             width: 1px;
             height: 1px;
@@ -149,53 +164,62 @@ if (session_status() == PHP_SESSION_NONE) {
                 display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 100%; /* Muncul di bawah header, sesuaikan dengan tinggi header */
+                top: 100%;
+                /* Muncul di bawah header, sesuaikan dengan tinggi header */
                 left: 0;
                 width: 100%;
                 background-color: #333;
                 padding: 10px 0;
             }
+
             .main-nav.active {
                 display: flex;
             }
+
             .main-nav li {
                 margin: 10px 20px;
                 width: calc(100% - 40px);
             }
+
             .main-nav a {
                 justify-content: center;
             }
 
             .menu-toggle {
                 display: block;
-                order: -1; 
-                margin-right: auto; 
+                order: -1;
+                margin-right: auto;
             }
+
             .app-header .logo {
-                margin-left: 15px; 
+                margin-left: 15px;
             }
 
             .user-nav li {
                 margin-left: 10px;
             }
+
             .user-nav a {
                 font-size: 0.8em;
                 padding: 6px 8px;
             }
+
             .user-nav a i {
                 font-size: 0.9em;
             }
         }
 
-         @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .app-header .logo {
                 font-size: 1.1em;
             }
+
             /* Anda bisa menambahkan penyesuaian lebih lanjut untuk user-nav di layar sangat kecil */
         }
     </style>
 </head>
-<body> 
+
+<body>
 
     <header class="app-header">
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -212,7 +236,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <li><a href="../Donasi/index.php"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
                 <li><a href="#organisasi"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
                 <li><a href="../Contact_us/index.php"><i class="fas fa-link"></i> Stay Connected</a></li>
-                </ul>
+            </ul>
         </nav>
 
         <nav class="user-nav">
@@ -235,7 +259,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <a href="#" onclick="return false;" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user-circle profile-icon"></i> <span class="sr-only">Profil Pengguna</span> <i class="fas fa-caret-down"></i>
                     </a>
-                     <div class="dropdown-content">
+                    <div class="dropdown-content">
                         <div style="padding: 10px 14px; border-bottom: 1px solid #ccc; font-weight: bold;">
                             <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
                         </div>
@@ -248,7 +272,7 @@ if (session_status() == PHP_SESSION_NONE) {
         </nav>
     </header>
 
- 
+
 
     <script>
         // Script untuk toggle menu hamburger di mobile
@@ -265,4 +289,4 @@ if (session_status() == PHP_SESSION_NONE) {
         }
     </script>
 
-</body> 
+</body>
