@@ -360,37 +360,5 @@ body {
   color: var(--icon-color); /* USE VARIABLE */
   transition: color 0.3s ease;
 }
-.profile-container {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-}
-
-.profile-btn {
-  background-color: #1b1919;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.profile-menu a {
-  display: block;
-  padding: 10px;
-  text-decoration: none;
-  color: white;
-}
-
-.profile-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background: #222;
-  color: #fff;
-  border-radius: 8px;
-  min-width: 150px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 100;
-}
 
 /* REMOVED: Extra closing curly brace that was at the end of the original file */

@@ -1,4 +1,5 @@
 <?php
+include '../header.php'; 
 // Mulai session jika belum dimulai (diperlukan untuk $_SESSION['username'])
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -69,13 +70,10 @@ if (session_status() == PHP_SESSION_NONE) {
             margin: 0;
             display: flex;
             align-items: center;
-            height: 100%;
         }
 
         .main-nav li, .user-nav li {
             margin-left: 15px;
-            display: flex;
-            align-items: center;
         }
 
         .main-nav a, .user-nav a {
@@ -89,7 +87,7 @@ if (session_status() == PHP_SESSION_NONE) {
             transition: background-color 0.3s ease;
         }
 
-        .main-nav a:hover,
+        .main-nav a:hover, 
         .user-nav a:hover,
         .user-nav .dropdown > a:hover {
             background-color: #555;
@@ -319,56 +317,7 @@ if (session_status() == PHP_SESSION_NONE) {
 </head>
 <body>
 
-    <header class="app-header">
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
-            <i class="fas fa-bars"></i>
-        </button>
 
-        <div class="logo">
-            <a href="../index.php"><i class="fas fa-church"></i> <span>Permata GBKP</span></a>
-        </div>
-
-        <nav class="main-nav" id="mainNav">
-            <ul>
-                <li><a href="../Pendataan_jemaat/index.php"><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
-                <li><a href="../Donasi/index.php"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
-                <li><a href="#organisasi"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
-                <li><a href="#connected"><i class="fas fa-link"></i> Stay Connected</a></li>
-            </ul>
-        </nav>
-
-        <nav class="user-nav">
-            <ul>
-                <li class="dropdown">
-                    <a href="#" class="language-switcher" onclick="return false;" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-globe"></i> <span>Bahasa</span> <i class="fas fa-caret-down"></i>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="?lang=id">Indonesia</a>
-                        <a href="?lang=en">English</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#notifikasi" aria-label="Notifikasi">
-                        <i class="fas fa-bell"></i> <span class="sr-only">Notifikasi</span>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" onclick="return false;" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle profile-icon"></i> <span class="sr-only">Profil Pengguna</span> <i class="fas fa-caret-down"></i>
-                    </a>
-                     <div class="dropdown-content">
-                        <div class="username-display">
-                            <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
-                        </div>
-                        <a href="#lihat-profil">Lihat Profil</a>
-                        <a href="#pengaturan">Pengaturan</a>
-                        <a href="logout.php">Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    </header>
 
     <div class="main-content-area">
         <div class="container main-container">

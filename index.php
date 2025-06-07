@@ -213,7 +213,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
                         </div>
                         <a href="#">Lihat Profil</a>
-                        <a href="#">Logout</a>
+                        <a href="logout.php">Logout</a>
                     </div>
                 </li>
             </ul>

@@ -1,5 +1,5 @@
 <?php
-include 'header.php'; 
+include '../header.php'; 
 // Define an array of card data.
 // In a real application, this data might come from a database.
 $cards = [
@@ -68,16 +68,7 @@ $cards = [
             <div class="filter-icon-wrapper">
                 <i class="fas fa-sliders-h filter-icon"></i>
             </div>
-            <div class="profile-container">
-        <div class="profile-btn" onclick="toggleProfileMenu()">
-            👤 Profil ▼
-        </div>
-        <div class="profile-menu" id="profileMenu">
-            <div style="padding: 10px; border-bottom: 1px solid #ccc;">
-                <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?>
-            </div>
-            <a href="logout.php">Logout</a>
-        </div>
+            
     </div>
     <script>
         function toggleProfileMenu() {

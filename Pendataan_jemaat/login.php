@@ -20,13 +20,13 @@ if (isset($_POST['login'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
+    <link rel="stylesheet" href="style-login.css">
 <head>
   <title>Login Admin</title>
 </head>
 
 <body>
-  <h2>Login Admin Gereja</h2>
+  <h2>Login Pengurus Permata GBKP</h2>
   <?php if (isset($error))
     echo "<p style='color:red;'>$error</p>"; ?>
   <form method="post">
