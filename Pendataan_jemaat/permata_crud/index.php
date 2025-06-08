@@ -310,8 +310,10 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td><?= $row['tanggal_lahir'] ?></td>
                         <td><?= $row['no_telepon'] ?></td>
                         <td>
-                            <a href="edit.php?id=<?= $row['id'] ?>" class="edit-btn">Edit</a>
-                            <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin hapus?')" class="hapus-btn">Hapus</a>
+                            <div style="display: flex;">
+                                <a href="edit.php?id=<?= $row['id'] ?>" class="edit-btn">Edit</a>
+                                <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin hapus?')" class="hapus-btn">Hapus</a>
+                            </div>
                         </td>
                     </tr>
                 <?php endwhile; ?>
