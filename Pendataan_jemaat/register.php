@@ -1,16 +1,16 @@
 <?php
-include 'db.php';
+include 'permata_crud/db.php';
 
 if (isset($_POST['register'])) {
   $username = $_POST['username'];
-  $password = md5($_POST['password']); // Disamakan dengan enkripsi di login
+  $password = md5($_POST['password']); 
 
-  // Cek apakah username sudah ada
+// fungsi cek username, apakah username sudah ada apa belum
   $check = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
   if (mysqli_num_rows($check) > 0) {
     $error = "Username sudah digunakan!";
   } else {
-    // Simpan ke database
+// jika username tidak ada, maka akan membuat akun baru
     $query = mysqli_query($conn, "INSERT INTO users (username, password) VALUES ('$username', '$password')");
     if ($query) {
       $success = "Registrasi berhasil! Silakan login.";
@@ -23,23 +23,28 @@ if (isset($_POST['register'])) {
 
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="style-login.css">
+
 <head>
   <title>Register User</title>
 </head>
+
 <body>
   <h2>Registrasi Akun Admin Gereja</h2>
 
   <?php
-  if (isset($success)) echo "<p style='color:green;'>$success</p>";
-  if (isset($error)) echo "<p style='color:red;'>$error</p>";
+  if (isset($success))
+    echo "<p style='color:green;'>$success</p>";
+  if (isset($error))
+    echo "<p style='color:red;'>$error</p>";
   ?>
 
   <form method="post">
     <p>Username: <input type="text" name="username" required></p>
     <p>Password: <input type="password" name="password" required></p>
     <input type="submit" name="register" value="Daftar">
+        <p><a href="login.php">Sudah punya akun? Login disini!</a></p>
   </form>
-
-  <p><a href="login.php">Sudah punya akun? Login di sini</a></p>
 </body>
+
 </html>

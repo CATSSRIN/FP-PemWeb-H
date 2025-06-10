@@ -4,15 +4,15 @@ include 'permata_crud/db.php';
 
 if (isset($_POST['login'])) {
   $username = $_POST['username'];
-  $password = md5($_POST['password']); // enkripsi md5 (harus sama dengan yang disimpan)
+  $password = md5($_POST['password']); // md5 berfungsi untuk enkripsi string menjadi nilai hash 128-bit
 
   $result = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
 
   if (mysqli_num_rows($result) == 1) {
     $_SESSION['login'] = true;
     $_SESSION['username'] = $username;
-    header("Location: index.php"); // arahkan ke index.php di folder prototype
-    exit; // tambahkan exit agar script berhenti setelah redirect
+    header("Location: index.php"); 
+    exit; 
   } else {
     $error = "Username atau password salah!";
   }

@@ -1,10 +1,9 @@
 <?php
 include '../header.php';
-// Define an array of card data.
-// In a real application, this data might come from a database.
+
 $cards = [
     [
-        'type' => 'image', // Custom type to differentiate
+        'type' => 'image', 
         'img_src' => 'asset/gedung1.jpg',
         'img_alt' => 'Gedung 1',
         'leader' => 'https://www.instagram.com/permatargsurabaya',
@@ -13,34 +12,34 @@ $cards = [
         'url' => 'permata_crud/index.php'
     ],
     [
-        'type' => 'image', // Or 'placeholder'
-        'img_src' => 'asset/gedung2.jpg', // Replace if 'image' type
+        'type' => 'image', 
+        'img_src' => 'asset/gedung2.jpg', 
         'img_alt' => 'Gedung 2',
         'leader' => 'https://www.instagram.com/permatasemarang/',
         'title' => 'GBKP Runggun Semarang',
         'location' => 'Jl. Semeru Dalam I No.5, Karangrejo, Kec. Gajahmungkur, Kota Semarang, Jawa Tengah 50231',
-        'url' => 'permata_crud2.php' // Optional: link to a detail page
+        'url' => 'permata_crud2.php' 
     ],
     [
-        'type' => 'image', // Or 'placeholder'
-        'img_src' => 'asset/gedung3.jpg', // Replace if 'image' type
+        'type' => 'image', 
+        'img_src' => 'asset/gedung3.jpg', 
         'img_alt' => 'Gedung 3',
         'leader' => 'https://www.instagram.com/permatacijantung/',
         'title' => 'GBKP Runggun Cijantung',
         'location' => 'RT.1/RW.2, Cijantung, Pasar Rebo, East Jakarta City, Jakarta 13770',
-        'url' => 'permata_crud3.php' // Optional: link to a detail page
-        // 'url' => 'detail_proyek3.php' // Optional for placeholders too
+        'url' => 'permata_crud3.php' 
+        
     ],
     [
-        'type' => 'placeholder', // Or 'placeholder'
-        'img_src' => 'asset/new_image_3.jpg', // Replace if 'image' type
+        'type' => 'placeholder', 
+        'img_src' => 'asset/new_image_3.jpg', 
         'img_alt' => 'Deskripsi Gambar Baru 4',
         'leader' => 'Nama Pemimpin/Pengelola Baru 4',
         'title' => 'Judul Kartu Baru 4 (Misal: Klenteng Sanggar Agung)',
         'location' => 'Lokasi Baru 4 (Misal: Kenjeran, Surabaya)',
-        'url' => 'detail_klenteng.php' // Optional: link to a detail page
+        'url' => 'detail_klenteng.php' 
     ]
-    // Add more card data arrays here
+    
 ];
 ?>
 <!DOCTYPE html>
@@ -118,10 +117,10 @@ $cards = [
     <main class="item-grid">
         <?php foreach ($cards as $card): ?>
             <?php
-            // Check if a URL is set for this card
+            
             $isClickable = isset($card['url']) && !empty($card['url']);
             if ($isClickable) {
-                // Start the anchor tag if the card is clickable
+                
                 echo '<a href="' . htmlspecialchars($card['url']) . '" class="card-link">';
             }
             ?>
@@ -155,7 +154,7 @@ $cards = [
             </div>
             <?php
             if ($isClickable) {
-                // Close the anchor tag if the card was clickable
+                
                 echo '</a>';
             }
             ?>

@@ -8,24 +8,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $tgl = $_POST['tanggal_lahir'];
     $telp = $_POST['no_telepon'];
 
-    // Check if connection exists
     if (!$conn) {
         die("Database connection failed: " . mysqli_connect_error());
     }
 
-    // Prepare statement with error checking
     $stmt = $conn->prepare("INSERT INTO jemaat (nama, alamat, tanggal_lahir, no_telepon) VALUES (?, ?, ?, ?)");
 
     if ($stmt === false) {
         die("Prepare statement failed: " . $conn->error);
     }
 
-    // Bind parameters
     if (!$stmt->bind_param("ssss", $nama, $alamat, $tgl, $telp)) {
         die("Binding parameters failed: " . $stmt->error);
     }
 
-    // Execute statement
     if (!$stmt->execute()) {
         die("Execute failed: " . $stmt->error);
     }
@@ -42,27 +38,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <title>Tambah Jemaat</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
     <style>
-        /* Styling Dasar untuk Header */
         body {
-            /* Sebaiknya ini ada di CSS global Anda */
             margin: 0;
             font-family: sans-serif;
         }
 
         .app-header {
             background-color: #333;
-            /* Warna latar belakang header */
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
             position: sticky;
-            /* Membuat header tetap di atas saat scroll */
             top: 0;
             z-index: 1000;
             min-height: 60px;
@@ -130,7 +122,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-left: 4px;
         }
 
-        /* Style untuk dropdown sederhana */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -171,7 +162,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         .sr-only {
-            /* Untuk menyembunyikan teks secara visual tapi tetap aksesibel */
             position: absolute;
             width: 1px;
             height: 1px;
@@ -183,7 +173,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border: 0;
         }
 
-        /* Bagian untuk hamburger menu (disembunyikan di desktop) */
         .menu-toggle {
             display: none;
             background: none;
@@ -193,14 +182,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
         }
 
-        /* Responsif untuk Header */
         @media (max-width: 992px) {
             .main-nav {
                 display: none;
                 flex-direction: column;
                 position: absolute;
                 top: 100%;
-                /* Muncul di bawah header, sesuaikan dengan tinggi header */
                 left: 0;
                 width: 100%;
                 background-color: #333;
@@ -248,11 +235,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             .app-header .logo {
                 font-size: 1.1em;
             }
-
-            /* Anda bisa menambahkan penyesuaian lebih lanjut untuk user-nav di layar sangat kecil */
         }
-
-        /*CSS Tambah*/
 
         .tambah-box {
             width: 30%;

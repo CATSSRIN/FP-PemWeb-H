@@ -327,12 +327,12 @@ if (session_status() == PHP_SESSION_NONE) {
     </div>
 
     <script>
-        // --- Script untuk Header (Menu Toggle) ---
+  
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('active');
         });
 
-        // --- Script untuk Chart ---
+
         const ctx = document.getElementById('donationSourceChart').getContext('2d');
         new Chart(ctx, {
             type: 'doughnut',
