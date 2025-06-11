@@ -9,10 +9,9 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donasi - Pembayaran</title>
+    <title>Tentang Kami - Permata GBKP</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome untuk ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         /* Root variables */
@@ -175,14 +174,14 @@ if (session_status() == PHP_SESSION_NONE) {
             padding: 0 10px; /* Add some padding */
         }
 
-        /* --- Styling Konten (Payment Card & Lainnya) --- */
+        /* --- Styling Konten --- */
         .main-content-area { /* Wrapper for content below header */
             padding: 20px; /* Padding for the content area */
         }
-        .main-container { /* For the payment card */
+        .main-container {
             width: 100%;
-            max-width: 700px;
-            margin: 0 auto; /* Center the payment card container */
+            max-width: 800px; /* Adjusted for slightly wider content */
+            margin: 0 auto;
         }
 
         .profile-card {
@@ -193,152 +192,122 @@ if (session_status() == PHP_SESSION_NONE) {
             border: 1px solid rgba(255, 255, 255, 0.25);
             color: #333;
         }
-
-        .profile-card h3, .profile-card p {
+        
+        .profile-card h3, .profile-card h4, .profile-card p {
             color: #333;
         }
         .profile-card .text-muted {
             color: #6c757d !important;
         }
-
-        .payment-option {
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: #fff;
-        }
-
-        .payment-option:hover {
-            border-color: #002366;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 35, 102, 0.2);
-        }
-
-        .payment-option.selected {
-            border-color: #002366;
-            background-color: rgba(0, 35, 102, 0.1);
-        }
-
-        .btn-primary { /* Payment button */
-            background: linear-gradient(135deg, #002366 0%, #003399 100%);
-            border: none;
-            border-radius: 25px;
-            padding: 10px 30px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 35, 102, 0.3);
-        }
-
-        .alert-success { /* Generic success message for payment */
-            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(25, 135, 84, 0.1) 100%);
-            border: 1px solid rgba(40, 167, 69, 0.2);
-            color: #155724;
-        }
-        .alert-success i {
-            color: inherit;
-        }
-         .profile-card .bg-primary-icon { /* Custom class for the icon background in payment card header */
+         .profile-card .bg-primary-icon { /* Custom class for the icon background */
             background-color: #002366 !important;
+        }
+
+        .statistic-item {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: .75rem;
+            padding: 1.25rem;
+            text-align: center;
+            height: 100%;
+        }
+
+        .statistic-item .stat-icon {
+            font-size: 2rem;
+            color: #002366;
+            margin-bottom: 0.5rem;
+        }
+
+        .statistic-item .stat-number {
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+        
+        .statistic-item .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
         }
 
         /* --- Responsif --- */
         @media (max-width: 992px) { /* Tablet and below */
-            .main-nav { /* Mobile navigation */
-                display: none; /* Hidden by default */
+            .main-nav {
+                display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 60px; /* Position below the fixed header */
+                top: 60px;
                 left: 0;
                 width: 100%;
-                background-color: #333; /* Same as header */
+                background-color: #333;
                 padding: 10px 0;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add shadow for better separation */
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             }
-            .main-nav.active { /* Class to show the nav */
+            .main-nav.active {
                 display: flex;
             }
             .main-nav li {
                 margin: 10px 20px;
-                width: calc(100% - 40px); /* Full width items */
+                width: calc(100% - 40px);
             }
             .main-nav a {
-                justify-content: center; /* Center text and icon */
-                 padding: 12px 10px; /* Larger tap target */
+                justify-content: center;
+                 padding: 12px 10px;
             }
 
-            .menu-toggle { /* Show hamburger */
-                display: flex; /* Use flex to align icon */
+            .menu-toggle {
+                display: flex;
                 align-items: center;
-                order: -1; /* Move to the far left */
+                order: -1;
             }
-            .app-header .logo { /* Center logo between hamburger and user nav */
-                /* position: absolute;
-                left: 50%;
-                transform: translateX(-50%); */
-                margin: 0 auto; /* Auto margins for centering between flex items */
-                padding-left: 40px; /* Space for hamburger */
-                padding-right: 40px; /* Space for user-nav potential width */
-            }
-             .user-nav { /* User nav pushed to the right */
-                /* margin-left: auto; */ /* Let flexbox handle it */
+            .app-header .logo {
+                margin: 0 auto;
+                padding-left: 40px;
+                padding-right: 40px;
             }
         }
 
-         @media (max-width: 768px) { /* Mobile */
+         @media (max-width: 768px) {
             .app-header .logo {
                 font-size: 1.1em;
                 padding-left: 15px;
                 padding-right: 15px;
             }
-            .app-header .logo span{ /* Hide text part of logo on small screens */
+            .app-header .logo span{
                  display: none;
             }
             .main-nav a {
                 font-size: 0.9em;
             }
              .user-nav li {
-                margin-left: 8px; /* Reduce margin */
+                margin-left: 8px;
             }
             .user-nav a {
                 font-size: 0.8em;
                 padding: 6px 8px;
             }
-             .user-nav .language-switcher span { /* Hide "Bahasa" text */
+             .user-nav .language-switcher span {
                 display: none;
             }
-            .payment-option {
-                padding: 15px;
-            }
         }
-         @media (max-width: 480px) { /* Very small screens */
+         @media (max-width: 480px) {
             .app-header .logo {
-                 display: none; /* Hide logo entirely if too cluttered */
+                 display: none;
             }
             .menu-toggle {
-                 margin-right: auto; /* Push toggle to left if logo is gone */
+                 margin-right: auto;
             }
              .user-nav a {
-                padding: 5px; /* Smaller padding */
+                padding: 5px;
             }
              .user-nav a i {
                 margin-right: 3px;
             }
             .user-nav .fa-caret-down{
-                display: none; /* Hide caret on very small screens */
+                display: none;
             }
-             .user-nav .profile-icon + .sr-only + .fa-caret-down { /* More specific selector if needed */
+             .user-nav .profile-icon + .sr-only + .fa-caret-down {
                 display: none;
             }
         }
-
     </style>
 </head>
 <body>
@@ -349,16 +318,14 @@ if (session_status() == PHP_SESSION_NONE) {
         </button>
 
         <div class="logo">
-            <!-- Assuming index.php is in the root of your project or FP-PEMWEB-H2 -->
             <a href="../index.php"><i class="fas fa-church"></i> <span>Permata GBKP</span></a>
         </div>
 
         <nav class="main-nav" id="mainNav">
             <ul>
-                <!-- Adjust href paths based on your actual file structure -->
-                <li><a href=../Pendataan_jemaat/index.php><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
-                <li><a href="#donasi"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
-                <li><a href="../Organisasi/index.php"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
+                <li><a href="../Pendataan_jemaat/index.php"><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
+                <li><a href="../Donasi/index.php"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
+                <li><a href="#organisasi"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
                 <li><a href="../Contact_us/index.php"><i class="fas fa-link"></i> Stay Connected</a></li>
             </ul>
         </nav>
@@ -389,7 +356,6 @@ if (session_status() == PHP_SESSION_NONE) {
                         </div>
                         <a href="#lihat-profil">Lihat Profil</a>
                         <a href="#pengaturan">Pengaturan</a>
-                        <!-- Assuming logout.php is in the root -->
                         <a href="../logout.php">Logout</a>
                     </div>
                 </li>
@@ -400,32 +366,82 @@ if (session_status() == PHP_SESSION_NONE) {
     <div class="main-content-area">
         <div class="container main-container">
             <div class="profile-card">
-                <div class="card-body p-4">
+                <div class="card-body p-4 p-md-5">
+
                     <div class="d-flex align-items-center mb-4">
                         <div class="bg-primary-icon rounded-circle d-flex align-items-center justify-content-center me-3"
                              style="width: 60px; height: 60px;">
-                            <i class="fas fa-credit-card fa-lg text-white"></i>
+                            <i class="fas fa-info-circle fa-lg text-white"></i>
                         </div>
                         <div>
-                            <h3 class="mb-1">Pembayaran</h3>
-                            <p class="text-muted mb-0">Pilih metode pembayaran Anda</p>
+                            <h3 class="mb-1">Tentang Gereja Batak Karo Protestan (GBKP)</h3>
+                            <p class="text-muted mb-0">Sejarah, Kepemimpinan, dan Statistik</p>
                         </div>
                     </div>
 
-                    <div id="paymentMethodsContainer" class="mb-4">
-                        <!-- Payment methods will be loaded here by JavaScript -->
+                    <hr class="my-4">
+
+                    <h4 class="mb-3">Sejarah Singkat</h4>
+                    <p>Gereja Batak Karo Protestan (GBKP) adalah sebuah gereja Kristen Protestan beraliran Calvinis di kalangan masyarakat Batak Karo. Gereja ini lahir sebagai hasil pekabaran Injil dari Nederlandsch Zendeling Genootschap (NZG) dari Belanda. Secara resmi, GBKP berdiri pada tanggal 18 April 1890.</p>
+                    <p>Pada awalnya, organisasi ini bernama "Gereja-Gereja Karo" dan kemudian secara resmi menjadi GBKP melalui Sidang Sinode I pada tahun 1941. GBKP berpusat di Kabanjahe, Kabupaten Karo, Sumatera Utara.</p>
+
+                    <h4 class="mt-5 mb-3">Statistik Gereja (Data 2023)</h4>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="statistic-item">
+                                <i class="fas fa-users stat-icon"></i>
+                                <div class="stat-number">306.174</div>
+                                <div class="stat-label">Jumlah Jemaat</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="statistic-item">
+                                <i class="fas fa-church stat-icon"></i>
+                                <div class="stat-number">1.023</div>
+                                <div class="stat-label">Gereja / Runggun</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="statistic-item">
+                                <i class="fas fa-map-marked-alt stat-icon"></i>
+                                <div class="stat-number">31</div>
+                                <div class="stat-label">Klasis (Distrik)</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="genericSuccessAlert" class="alert alert-success d-none mb-4">
-                        <i class="fas fa-check-circle me-2"></i>
-                        <span id="genericSuccessMessage"></span>
-                    </div>
+                    <h4 class="mt-5 mb-3">Pimpinan Moderamen (Periode 2020-2025)</h4>
+                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Ketua Umum
+                            <span class="fw-bold">Pdt. Krismas Imanta Barus, M.Th, L.M.</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Sekretaris Umum
+                            <span class="fw-bold">Pdt. Yunus Bangun, M.Th.</span>
+                        </li>
+                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Bendahara Umum
+                            <span class="fw-bold">Pt. Mulia Perangin-angin, S.E.</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Kabid. Pert testemunian
+                            <span class="fw-bold">Pdt. Yusuf Tarigan, S.Th, M.M.</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Kabid. Koinonia
+                            <span class="fw-bold">Pdt. Jenny Eva Karosekali, S.Th, M.M.</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Kabid. Diakonia
+                            <span class="fw-bold">Pdt. Mestika Nan-guna Ginting, S.Th, M.Psi.</span>
+                        </li>
+                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Wakil Sekretaris Umum
+                            <span class="fw-bold">Pdt. Endang Terkelin Tarigan, M.Th.</span>
+                        </li>
+                    </ul>
 
-                    <div class="text-center mt-4">
-                        <button class="btn btn-primary btn-lg" id="payButton" disabled onclick="processGenericPayment()">
-                            <i class="fas fa-shield-alt me-2"></i>Proses Pembayaran
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -444,109 +460,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 menuToggle.setAttribute('aria-expanded', isExpanded);
             });
         }
-
-        // --- Script untuk Konten (Payment Card) ---
-        let selectedPaymentMethod = null;
-
-        function loadPaymentMethods() {
-            const container = document.getElementById('paymentMethodsContainer');
-            if (!container) {
-                console.error('Payment methods container not found!');
-                return;
-            }
-            container.innerHTML = '';
-            const payButton = document.getElementById('payButton');
-
-            const methods = [
-                { name: 'Transfer Bank BNI', icon: 'fa-university', details: 'No. Rek: 482-005-5550 <br> a/n Caezarlov nugraha' },
-                { name: 'Virtual Account Mandiri', icon: 'fa-credit-card', details: 'VA: 1728216177' },
-                { name: 'QRIS', icon: 'fa-wallet', details: 'Scan QR Code yang tersedia' },
-                { name: 'GoPay', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi GoPay' },
-                //{ name: 'OVO', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi OVO' },
-                //{ name: 'DANA', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi DANA' }
-            ];
-
-            const row = document.createElement('div');
-            row.className = 'row';
-
-            methods.forEach(method => {
-                const col = document.createElement('div');
-                col.className = 'col-md-6 mb-3';
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'payment-option text-center h-100 d-flex flex-column justify-content-center';
-                optionDiv.innerHTML = `
-                    <h5><i class="fas ${method.icon} me-2"></i>${method.name}</h5>
-                    <p class="small text-muted mb-0">${method.details}</p>
-                `;
-                optionDiv.onclick = () => {
-                    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
-                    optionDiv.classList.add('selected');
-                    selectedPaymentMethod = method.name;
-                    if (payButton) payButton.disabled = false;
-                };
-                col.appendChild(optionDiv);
-                row.appendChild(col);
-            });
-            container.appendChild(row);
-
-            if(payButton && methods.length === 0){
-                payButton.disabled = true;
-            }
-        }
-
-        function processGenericPayment() {
-            if (!selectedPaymentMethod) {
-                alert('Silakan pilih metode pembayaran terlebih dahulu.');
-                return;
-            }
-
-            const genericSuccessAlert = document.getElementById('genericSuccessAlert');
-            const genericSuccessMessage = document.getElementById('genericSuccessMessage');
-            const payButton = document.getElementById('payButton');
-
-            if (genericSuccessMessage) {
-                genericSuccessMessage.textContent = `Pembayaran dengan metode ${selectedPaymentMethod} sedang diproses!`;
-            }
-            if (genericSuccessAlert) {
-                genericSuccessAlert.classList.remove('d-none');
-            }
-
-            if (payButton) {
-                payButton.disabled = true;
-                payButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
-            }
-
-            setTimeout(() => {
-                if (genericSuccessMessage) {
-                    genericSuccessMessage.textContent = `Pembayaran dengan metode ${selectedPaymentMethod} telah berhasil diproses.`;
-                }
-                if (payButton) {
-                    payButton.innerHTML = '<i class="fas fa-shield-alt me-2"></i>Proses Pembayaran Lain';
-                    payButton.disabled = true;
-                }
-                document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
-                selectedPaymentMethod = null;
-
-                setTimeout(() => {
-                    if (genericSuccessAlert) {
-                        genericSuccessAlert.classList.add('d-none');
-                    }
-                    if (payButton) {
-                         payButton.innerHTML = '<i class="fas fa-shield-alt me-2"></i>Proses Pembayaran';
-                         payButton.disabled = true; // Keep disabled until new selection
-                    }
-                }, 4000);
-
-            }, 2500);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPaymentMethods();
-            const payButton = document.getElementById('payButton');
-            if (payButton) {
-                 payButton.disabled = true;
-            }
-        });
     </script>
 </body>
 </html>
