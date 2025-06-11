@@ -1,35 +1,33 @@
 <?php
 include 'koneksi.php';
 include 'db.php';
-$result = $conn->query("SELECT * FROM jemaat");
 
-$cari = isset($_GET['cari']) ? $_GET['cari'] : '';
-if ($cari != '') {
-    $query = "SELECT * FROM jemaat WHERE nama LIKE ?";
-    $stmt = $conn->prepare($query);
-    $search = "%$cari%";
-    $stmt->bind_param("s", $search);
+$id = $_GET['id'];
+$data = $conn->query("SELECT * FROM jemaat_semarang WHERE id=$id")->fetch_assoc();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nama = $_POST['nama'];
+    $alamat = $_POST['alamat'];
+    $tgl = $_POST['tanggal_lahir'];
+    $telp = $_POST['no_telepon'];
+
+    $stmt = $conn->prepare("UPDATE jemaat_semarang SET nama=?, alamat=?, tanggal_lahir=?, no_telepon=? WHERE id=?");
+    $stmt->bind_param("ssssi", $nama, $alamat, $tgl, $telp, $id);
     $stmt->execute();
-    $result = $stmt->get_result();
-} else {
-    $result = $conn->query("SELECT * FROM jemaat");
-}
-?>
-
-<?php
-// Mulai session jika belum dimulai (diperlukan untuk $_SESSION['username'])
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+    header("Location: index.php");
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
-    <title>Data Jemaat PERMATA</title>
+    <meta charset="UTF-8">
+    <title>Edit Jemaat</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
     <style>
         /* Styling Dasar untuk Header */
@@ -237,6 +235,20 @@ if (session_status() == PHP_SESSION_NONE) {
 
             /* Anda bisa menambahkan penyesuaian lebih lanjut untuk user-nav di layar sangat kecil */
         }
+
+        /*CSS Tambah*/
+
+        .tambah-box {
+            width: 30%;
+            background: #fff;
+            align-items: center;
+            margin-top: 40px;
+            border-radius: 15px;
+        }
+
+        .container {
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -253,9 +265,9 @@ if (session_status() == PHP_SESSION_NONE) {
         <nav class="main-nav" id="mainNav">
             <ul>
                 <li><a href="../index.php"><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
-                <li><a href="../../Donasi/index.php"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
-                <li><a href="../../Organisasi/index.php"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
-                <li><a href="../../Contact_us/index.php"><i class="fas fa-link"></i> Stay Connected</a></li>
+                <li><a href="/FP-PemWeb-H-main/Donasi/index.php"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
+                <li><a href="#organisasi"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
+                <li><a href="/FP-PemWeb-H-main/Contact_us/index.php"><i class="fas fa-link"></i> Stay Connected</a></li>
             </ul>
         </nav>
 
@@ -292,51 +304,43 @@ if (session_status() == PHP_SESSION_NONE) {
         </nav>
     </header>
 
-    <div class="main-content-area">
-        <h2>Data Jemaat GBKP Runggun Surabaya</h2>
-        <div class="tambah">
-            <a href="tambah.php" class="tambah-btn">Tambah Jemaat</a>
-        </div>
+    <div class="tambah-box p-4 mx-auto">
+        <div class="container">
+            <h2>Edit Jemaat</h2>
+            <form method="POST">
+                <div class="mb-0">
+                    <label class="form-label">Nama</label>
+                    <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($data['nama']) ?>" required>
+                    <br>
+                </div>
 
-        <div class="export">
-            <a href="export.php?type=excel" class="excel">Export ke Excel</a>
-            <a href="export.php?type=pdf" class="pdf" target="_blank">Export ke PDF</a>
-        </div>
+                <div class="mb-0">
+                    <label class="form-label">Alamat</label>
+                    <textarea name="alamat" class="form-control" required><?= htmlspecialchars($data['alamat']) ?></textarea>
+                    <br>
+                </div>
 
-        <div>
-            <form method="GET" action="">
-                <input type="text" style="height: 25px; border-radius: 10px;" name="cari" placeholder="Cari nama..." value="<?= isset($_GET['cari']) ? htmlspecialchars($_GET['cari']) : '' ?>">
-                <button type="submit" style="height: 25px; border-radius: 10px;">Cari</button>
+                <div class="mb-0">
+                    <label class="form-label">Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir" class="form-control" value="<?= $data['tanggal_lahir'] ?>">
+                    <br>
+                </div>
+
+                <div class="mb-0">
+                    <label class="form-label">No Telp</label>
+                    <input type="text" name="no_telepon" class="form-control" value="<?= htmlspecialchars($data['no_telepon']) ?>">
+                    <br>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary me-1">Update</button>
+                    <a href="index.php" class="btn btn-dark">Kembali</a>
+                </div>
+
             </form>
-
-            <table class="table" border="1" cellpadding="10" cellspacing="0">
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>Tgl Lahir</th>
-                    <th>No Telp</th>
-                    <th>Aksi</th>
-                </tr>
-                <?php $no = 1;
-                while ($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= htmlspecialchars($row['nama']) ?></td>
-                        <td><?= htmlspecialchars($row['alamat']) ?></td>
-                        <td><?= $row['tanggal_lahir'] ?></td>
-                        <td><?= $row['no_telepon'] ?></td>
-                        <td>
-                            <div style="display: flex;">
-                                <a href="edit.php?id=<?= $row['id'] ?>" class="edit-btn">Edit</a>
-                                <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin hapus?')" class="hapus-btn">Hapus</a>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </table>
         </div>
     </div>
+
 </body>
 
 </html>

@@ -1,0 +1,120 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(to right, #002366, lightcoral);
+  /* This line creates the gradient */
+  color: var(--text-color);
+  /* Should be using your text color variable */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h2 {
+  text-align: center;
+}
+
+.main-content-area {
+  background: #fff;
+  margin-top: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+}
+
+table {
+  border: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  text-align: left;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #9f9f9f;
+}
+
+.tambah {
+  padding: 5px;
+}
+
+.export {
+  float: right;
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
+.excel {
+  padding: 10px;
+  background: #078500;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.excel:hover {
+  background: #045700;
+}
+
+.pdf {
+  padding: 10px;
+  background: #c90700;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.pdf:hover {
+  background: #860400;
+}
+
+.tambah {
+  float: left;
+}
+
+.tambah-btn {
+  padding: 10px;
+  background: #000000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.tambah-btn:hover {
+  background: #424242;
+}
+
+.edit-btn {
+  padding: 5px;
+  background: #0058d3;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.5s;
+  font-size: 0.9em;
+  margin-right: 2px;
+}
+
+.edit-btn:hover {
+  background: #002f71;
+}
+
+.hapus-btn {
+  padding: 5px;
+  background: #c90700;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.5s;
+  font-size: 0.9em;
+}
+
+.hapus-btn:hover {
+  background: #860400;
+}
