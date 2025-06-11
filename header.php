@@ -266,7 +266,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         </div>
                         <a href="#lihat-profil">Lihat Profil</a>
                         <a href="#pengaturan">Pengaturan</a>
-                        <a href="/FP-PEMWEB-H/logout.php">Logout</a>
+                        <a href="../logout.php">Logout</a>
                     </div>
                 </li>
             </ul>
