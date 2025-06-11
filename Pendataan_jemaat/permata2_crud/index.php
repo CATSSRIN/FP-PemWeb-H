@@ -1,18 +1,18 @@
 <?php
 include 'koneksi.php';
 include 'db.php';
-$result = $conn->query("SELECT * FROM jemaat");
+$result = $conn->query("SELECT * FROM jemaat_semarang");
 
 $cari = isset($_GET['cari']) ? $_GET['cari'] : '';
 if ($cari != '') {
-    $query = "SELECT * FROM jemaat WHERE nama LIKE ?";
+    $query = "SELECT * FROM jemaat_semarang WHERE nama LIKE ?";
     $stmt = $conn->prepare($query);
     $search = "%$cari%";
     $stmt->bind_param("s", $search);
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
-    $result = $conn->query("SELECT * FROM jemaat");
+    $result = $conn->query("SELECT * FROM jemaat_semarang");
 }
 ?>
 
@@ -293,7 +293,7 @@ if (session_status() == PHP_SESSION_NONE) {
     </header>
 
     <div class="main-content-area">
-        <h2>Data Jemaat GBKP Runggun Surabaya</h2>
+        <h2>Data Jemaat GBKP Runggun Semarang</h2>
         <div class="tambah">
             <a href="tambah.php" class="tambah-btn">Tambah Jemaat</a>
         </div>

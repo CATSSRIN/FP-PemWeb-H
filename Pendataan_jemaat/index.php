@@ -19,7 +19,7 @@ $cards = [
         'leader' => 'https://www.instagram.com/permatasemarang/',
         'title' => 'GBKP Runggun Semarang',
         'location' => 'Jl. Semeru Dalam I No.5, Karangrejo, Kec. Gajahmungkur, Kota Semarang, Jawa Tengah 50231',
-        'url' => 'permata_crud2.php',
+        'url' => 'permata2_crud/index.php',
         'provinsi' => 'jateng'
     ],
     [
