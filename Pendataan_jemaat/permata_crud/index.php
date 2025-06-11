@@ -2,6 +2,18 @@
 include 'koneksi.php';
 include 'db.php';
 $result = $conn->query("SELECT * FROM jemaat");
+
+$cari = isset($_GET['cari']) ? $_GET['cari'] : '';
+if ($cari != '') {
+    $query = "SELECT * FROM jemaat WHERE nama LIKE ?";
+    $stmt = $conn->prepare($query);
+    $search = "%$cari%";
+    $stmt->bind_param("s", $search);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $result = $conn->query("SELECT * FROM jemaat");
+}
 ?>
 
 <?php
@@ -292,6 +304,11 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
 
         <div>
+            <form method="GET" action="">
+                <input type="text" style="height: 25px; border-radius: 10px;" name="cari" placeholder="Cari nama..." value="<?= isset($_GET['cari']) ? htmlspecialchars($_GET['cari']) : '' ?>">
+                <button type="submit" style="height: 25px; border-radius: 10px;">Cari</button>
+            </form>
+
             <table class="table" border="1" cellpadding="10" cellspacing="0">
                 <tr>
                     <th>No</th>

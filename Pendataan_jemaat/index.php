@@ -3,45 +3,49 @@ include '../header.php';
 
 $cards = [
     [
-        'type' => 'image', 
+        'type' => 'image',
         'img_src' => 'asset/gedung1.jpg',
         'img_alt' => 'Gedung 1',
         'leader' => 'https://www.instagram.com/permatargsurabaya',
         'title' => 'Gereja Batak Karo Protestan (GBKP)',
         'location' => 'Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226',
-        'url' => 'permata_crud/index.php'
+        'url' => 'permata_crud/index.php',
+        'provinsi' => 'jatim'
     ],
     [
-        'type' => 'image', 
-        'img_src' => 'asset/gedung2.jpg', 
+        'type' => 'image',
+        'img_src' => 'asset/gedung2.jpg',
         'img_alt' => 'Gedung 2',
         'leader' => 'https://www.instagram.com/permatasemarang/',
         'title' => 'GBKP Runggun Semarang',
         'location' => 'Jl. Semeru Dalam I No.5, Karangrejo, Kec. Gajahmungkur, Kota Semarang, Jawa Tengah 50231',
-        'url' => 'permata_crud2.php' 
+        'url' => 'permata_crud2.php',
+        'provinsi' => 'jateng'
     ],
     [
-        'type' => 'image', 
-        'img_src' => 'asset/gedung3.jpg', 
+        'type' => 'image',
+        'img_src' => 'asset/gedung3.jpg',
         'img_alt' => 'Gedung 3',
         'leader' => 'https://www.instagram.com/permatacijantung/',
         'title' => 'GBKP Runggun Cijantung',
         'location' => 'RT.1/RW.2, Cijantung, Pasar Rebo, East Jakarta City, Jakarta 13770',
-        'url' => 'permata_crud3.php' 
-        
+        'url' => 'permata_crud3.php',
+        'provinsi' => 'jakarta'
     ],
     [
-        'type' => 'placeholder', 
-        'img_src' => 'asset/new_image_3.jpg', 
+        'type' => 'placeholder',
+        'img_src' => 'asset/new_image_3.jpg',
         'img_alt' => 'Deskripsi Gambar Baru 4',
         'leader' => 'Nama Pemimpin/Pengelola Baru 4',
         'title' => 'Judul Kartu Baru 4 (Misal: Klenteng Sanggar Agung)',
         'location' => 'Lokasi Baru 4 (Misal: Kenjeran, Surabaya)',
-        'url' => 'detail_klenteng.php' 
+        'url' => 'detail_klenteng.php',
+        'provinsi' => ''
     ]
-    
+
 ];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,20 +59,6 @@ $cards = [
 
 <body class="">
     <link rel="stylesheet" href="styled.css">
-
-
-
-    <div class="container">
-        <header class="header-section">
-            <div class="search-bar">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Search">
-            </div>
-            <div class="filter-icon-wrapper">
-                <i class="fas fa-sliders-h filter-icon"></i>
-            </div>
-
-    </div>
     <script>
         function toggleProfileMenu() {
             var menu = document.getElementById('profileMenu');
@@ -81,35 +71,17 @@ $cards = [
     </script>
     </header>
 
-    <nav class="filter-buttons">
+    <h1 style="color: #fff; margin-left: 20px;">Daftar GBKP</h1>
+    <nav class="filter-buttons" style="margin-top: 10px;">
         <div class="dropdown">
             <button class="filter-btn" onclick="toggleDropdown('jatim-dropdown')">
-                Jawa Timur <i class="fas fa-chevron-down"></i>
+                Provinsi <i class="fas fa-chevron-down"></i>
             </button>
             <div class="dropdown-content" id="jatim-dropdown">
-                <button class="dropdown-item" onclick="selectDropdownItem(this, 'Jawa Timur')">Surabaya</button>
-                <button class="dropdown-item" onclick="selectDropdownItem(this, 'Jawa Timur')">Sidoarjo</button>
-                <button class="dropdown-item" onclick="selectDropdownItem(this, 'Jawa Timur')">Gresik</button>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="filter-btn" onclick="toggleDropdown('jateng-dropdown')">
-                Jawa Tengah <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-content" id="jateng-dropdown">
-                <button class="dropdown-item" onclick="selectDropdownItem(this, 'Jawa Tengah')">Semarang</button>
-                <button class="dropdown-item" onclick="selectDropdownItem(this, 'Jawa Tengah')">Solo</button>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="filter-btn" onclick="toggleDropdown('jabar-dropdown')">
-                Jawa Barat <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-content" id="jabar-dropdown">
-                <button class="dropdown-item" onclick="selectDropdownItem(this, 'Jawa Barat')">Bandung</button>
-                <button class="dropdown-item" onclick="selectDropdownItem(this, 'Jawa Barat')">Bogor</button>
+                <button class="dropdown-item" onclick="selectDropdownItem(this, 'all')">Semua</button>
+                <button class="dropdown-item" onclick="selectDropdownItem(this, 'jatim')">Jawa Timur</button>
+                <button class="dropdown-item" onclick="selectDropdownItem(this, 'jateng')">Jawa Tengah</button>
+                <button class="dropdown-item" onclick="selectDropdownItem(this, 'jakarta')">Jakarta</button>
             </div>
         </div>
     </nav>
@@ -117,14 +89,14 @@ $cards = [
     <main class="item-grid">
         <?php foreach ($cards as $card): ?>
             <?php
-            
+
             $isClickable = isset($card['url']) && !empty($card['url']);
             if ($isClickable) {
-                
+
                 echo '<a href="' . htmlspecialchars($card['url']) . '" class="card-link">';
             }
             ?>
-            <div class="item-card">
+            <div class="item-card" data-provinsi="<?= htmlspecialchars($card['provinsi']); ?>">
                 <div class="card-image-placeholder">
                     <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
                         <img src="<?php echo htmlspecialchars($card['img_src']); ?>"
@@ -154,7 +126,7 @@ $cards = [
             </div>
             <?php
             if ($isClickable) {
-                
+
                 echo '</a>';
             }
             ?>
@@ -163,6 +135,38 @@ $cards = [
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function selectDropdownItem(button, provinsi) {
+            const allCards = document.querySelectorAll('.item-card');
+
+            allCards.forEach(card => {
+                const cardProvinsi = card.getAttribute('data-provinsi');
+                if (provinsi === 'all' || cardProvinsi === provinsi) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Opsional: Highlight tombol terpilih
+            const items = document.querySelectorAll('.dropdown-item');
+            items.forEach(item => item.classList.remove('selected'));
+            button.classList.add('selected');
+        }
+
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('show');
+        }
+
+        // Optional close when clicking outside
+        window.onclick = function(e) {
+            if (!e.target.matches('.filter-btn')) {
+                document.querySelectorAll('.dropdown-content').forEach(d => d.classList.remove('show'));
+            }
+        };
+    </script>
+
 </body>
 
 </html>
