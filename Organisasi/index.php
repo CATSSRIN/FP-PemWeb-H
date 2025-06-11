@@ -354,8 +354,8 @@ if (session_status() == PHP_SESSION_NONE) {
                         <div class="username-display">
                             <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
                         </div>
-                        <a href="#lihat-profil">Lihat Profil</a>
-                        <a href="#pengaturan">Pengaturan</a>
+                        <a href="../register.php">register</a>
+                        <a href="../login.php">Login</a>
                         <a href="../logout.php">Logout</a>
                     </div>
                 </li>
