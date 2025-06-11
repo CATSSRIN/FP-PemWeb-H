@@ -390,7 +390,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <a href="#lihat-profil">Lihat Profil</a>
                         <a href="#pengaturan">Pengaturan</a>
                         <!-- Assuming logout.php is in the root -->
-                        <a href="logout.php">Logout</a>
+                        <a href="../logout.php">Logout</a>
                     </div>
                 </li>
             </ul>
