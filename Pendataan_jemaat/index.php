@@ -29,7 +29,7 @@ $cards = [
         'leader' => 'https://www.instagram.com/permatacijantung/',
         'title' => 'GBKP Runggun Cijantung',
         'location' => 'RT.1/RW.2, Cijantung, Pasar Rebo, East Jakarta City, Jakarta 13770',
-        'url' => 'permata_crud3.php',
+        'url' => 'permata3_crud/index.php',
         'provinsi' => 'jakarta'
     ],
     [

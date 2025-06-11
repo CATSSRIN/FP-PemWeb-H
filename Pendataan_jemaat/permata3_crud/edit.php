@@ -2,59 +2,51 @@
 include 'koneksi.php';
 include 'db.php';
 
+$id = $_GET['id'];
+$data = $conn->query("SELECT * FROM jemaat_cijantung WHERE id=$id")->fetch_assoc();
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nama = $_POST['nama'];
     $alamat = $_POST['alamat'];
     $tgl = $_POST['tanggal_lahir'];
     $telp = $_POST['no_telepon'];
 
-    if (!$conn) {
-        die("Database connection failed: " . mysqli_connect_error());
-    }
-
-    $stmt = $conn->prepare("INSERT INTO jemaat_cijantung (nama, alamat, tanggal_lahir, no_telepon) VALUES (?, ?, ?, ?)");
-
-    if ($stmt === false) {
-        die("Prepare statement failed: " . $conn->error);
-    }
-
-    if (!$stmt->bind_param("ssss", $nama, $alamat, $tgl, $telp)) {
-        die("Binding parameters failed: " . $stmt->error);
-    }
-
-    if (!$stmt->execute()) {
-        die("Execute failed: " . $stmt->error);
-    }
-
-    $stmt->close();
+    $stmt = $conn->prepare("UPDATE jemaat_cijantung SET nama=?, alamat=?, tanggal_lahir=?, no_telepon=? WHERE id=?");
+    $stmt->bind_param("ssssi", $nama, $alamat, $tgl, $telp, $id);
+    $stmt->execute();
     header("Location: index.php");
     exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
-    <title>Tambah Jemaat</title>
+    <meta charset="UTF-8">
+    <title>Edit Jemaat</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
     <style>
+        /* Styling Dasar untuk Header */
         body {
+            /* Sebaiknya ini ada di CSS global Anda */
             margin: 0;
             font-family: sans-serif;
         }
 
         .app-header {
             background-color: #333;
+            /* Warna latar belakang header */
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
             position: sticky;
+            /* Membuat header tetap di atas saat scroll */
             top: 0;
             z-index: 1000;
             min-height: 60px;
@@ -122,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-left: 4px;
         }
 
+        /* Style untuk dropdown sederhana */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -162,6 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         .sr-only {
+            /* Untuk menyembunyikan teks secara visual tapi tetap aksesibel */
             position: absolute;
             width: 1px;
             height: 1px;
@@ -173,6 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border: 0;
         }
 
+        /* Bagian untuk hamburger menu (disembunyikan di desktop) */
         .menu-toggle {
             display: none;
             background: none;
@@ -182,12 +177,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
         }
 
+        /* Responsif untuk Header */
         @media (max-width: 992px) {
             .main-nav {
                 display: none;
                 flex-direction: column;
                 position: absolute;
                 top: 100%;
+                /* Muncul di bawah header, sesuaikan dengan tinggi header */
                 left: 0;
                 width: 100%;
                 background-color: #333;
@@ -235,7 +232,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             .app-header .logo {
                 font-size: 1.1em;
             }
+
+            /* Anda bisa menambahkan penyesuaian lebih lanjut untuk user-nav di layar sangat kecil */
         }
+
+        /*CSS Tambah*/
 
         .tambah-box {
             width: 30%;
@@ -305,35 +306,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <div class="tambah-box p-4 mx-auto">
         <div class="container">
-            <h2>Tambah Jemaat</h2>
+            <h2>Edit Jemaat</h2>
             <form method="POST">
                 <div class="mb-0">
                     <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama" required><br>
+                    <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($data['nama']) ?>" required>
+                    <br>
                 </div>
 
                 <div class="mb-0">
                     <label class="form-label">Alamat</label>
-                    <textarea name="alamat" class="form-control" required></textarea><br>
+                    <textarea name="alamat" class="form-control" required><?= htmlspecialchars($data['alamat']) ?></textarea>
+                    <br>
                 </div>
 
                 <div class="mb-0">
                     <label class="form-label">Tanggal Lahir</label>
-                    <input type="date" name="tanggal_lahir" class="form-control"><br>
+                    <input type="date" name="tanggal_lahir" class="form-control" value="<?= $data['tanggal_lahir'] ?>">
+                    <br>
                 </div>
 
                 <div class="mb-0">
                     <label class="form-label">No Telp</label>
-                    <input type="text" name="no_telepon" class="form-control"><br>
+                    <input type="text" name="no_telepon" class="form-control" value="<?= htmlspecialchars($data['no_telepon']) ?>">
+                    <br>
                 </div>
 
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary me-1">Simpan</button>
+                    <button type="submit" class="btn btn-primary me-1">Update</button>
                     <a href="index.php" class="btn btn-dark">Kembali</a>
                 </div>
+
             </form>
         </div>
     </div>
+
 </body>
 
 </html>
