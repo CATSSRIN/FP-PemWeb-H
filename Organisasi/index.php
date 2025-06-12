@@ -1,5 +1,5 @@
 <?php
-// Mulai session jika belum dimulai (diperlukan untuk $_SESSION['username'])
+include '../header.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -9,41 +9,38 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang Kami - Permata GBKP</title>
+    <title>Hubungi Kami - Permata GBKP</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* Root variables */
         :root {
-            --text-color: #333; /* Default text color */
+            --text-color: #333;
         }
 
-        /* Global Body Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background: linear-gradient(to right, #002366, lightcoral); /* Gradient background */
+            background: linear-gradient(to right, #002366, lightcoral);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
             min-height: 100vh;
-            padding-top: 70px; /* Space for the fixed header - adjust if header height changes */
+            padding-top: 70px;
         }
 
-        /* --- Styling Header --- */
         .app-header {
             background-color: #333;
-            padding: 0 20px; /* Adjusted padding */
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
-            position: fixed; /* Header fixed at the top */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            height: 60px; /* Explicit height for header */
+            height: 60px;
         }
 
         .app-header .logo {
@@ -59,10 +56,9 @@ if (session_status() == PHP_SESSION_NONE) {
         .app-header .logo a i {
             margin-right: 8px;
         }
-        .app-header .logo span { /* To control visibility of logo text */
+        .app-header .logo span {
             display: inline-block;
         }
-
 
         .main-nav ul, .user-nav ul {
             list-style: none;
@@ -70,13 +66,10 @@ if (session_status() == PHP_SESSION_NONE) {
             margin: 0;
             display: flex;
             align-items: center;
-            height: 100%; /* Ensure nav items can align center vertically if needed */
         }
 
         .main-nav li, .user-nav li {
             margin-left: 15px;
-            display: flex; /* For vertical alignment of link content */
-            align-items: center;
         }
 
         .main-nav a, .user-nav a {
@@ -109,24 +102,24 @@ if (session_status() == PHP_SESSION_NONE) {
             margin-left: 4px;
         }
 
-        .dropdown { /* For header dropdowns */
+        .dropdown {
             position: relative;
             display: inline-block;
         }
 
-        .dropdown-content { /* For header dropdowns */
+        .dropdown-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 170px; /* Adjusted width */
+            min-width: 170px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1001; /* Ensure dropdown is above other content */
+            z-index: 1001;
             border-radius: 5px;
             right: 0;
-            top: 100%; /* Position below the parent */
+            top: 100%;
         }
 
-        .dropdown-content a, .dropdown-content div.username-display { /* For header dropdowns */
+        .dropdown-content a, .dropdown-content div.username-display {
             color: black;
             padding: 10px 14px;
             text-decoration: none;
@@ -152,7 +145,7 @@ if (session_status() == PHP_SESSION_NONE) {
             display: block;
         }
 
-        .sr-only { /* Accessibility helper */
+        .sr-only {
             position: absolute;
             width: 1px;
             height: 1px;
@@ -164,27 +157,26 @@ if (session_status() == PHP_SESSION_NONE) {
             border: 0;
         }
 
-        .menu-toggle { /* Hamburger menu button */
+        .menu-toggle {
             display: none;
             background: none;
             border: none;
             color: white;
             font-size: 1.5em;
             cursor: pointer;
-            padding: 0 10px; /* Add some padding */
+            padding: 0 10px;
         }
 
-        /* --- Styling Konten --- */
-        .main-content-area { /* Wrapper for content below header */
-            padding: 20px; /* Padding for the content area */
+        .main-content-area {
+            padding: 20px;
         }
         .main-container {
             width: 100%;
-            max-width: 800px; /* Adjusted for slightly wider content */
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .profile-card {
+        .contact-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
@@ -192,44 +184,55 @@ if (session_status() == PHP_SESSION_NONE) {
             border: 1px solid rgba(255, 255, 255, 0.25);
             color: #333;
         }
-        
-        .profile-card h3, .profile-card h4, .profile-card p {
+
+        .contact-card h3, .contact-card p {
             color: #333;
         }
-        .profile-card .text-muted {
+        .contact-card .text-muted {
             color: #6c757d !important;
         }
-         .profile-card .bg-primary-icon { /* Custom class for the icon background */
+
+        .contact-card .bg-primary-icon {
             background-color: #002366 !important;
         }
 
-        .statistic-item {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: .75rem;
-            padding: 1.25rem;
-            text-align: center;
-            height: 100%;
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .form-control:focus {
+            border-color: #002366;
+            box-shadow: 0 0 0 0.25rem rgba(0, 35, 102, 0.25);
         }
 
-        .statistic-item .stat-icon {
-            font-size: 2rem;
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .contact-info-item i {
+            font-size: 1.5rem;
             color: #002366;
-            margin-bottom: 0.5rem;
+            width: 40px;
+            text-align: center;
         }
 
-        .statistic-item .stat-number {
-            font-size: 1.75rem;
-            font-weight: bold;
-        }
-        
-        .statistic-item .stat-label {
-            font-size: 0.9rem;
-            color: #6c757d;
+        .btn-primary {
+            background: linear-gradient(135deg, #002366 0%, #003399 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
         }
 
-        /* --- Responsif --- */
-        @media (max-width: 992px) { /* Tablet and below */
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 35, 102, 0.3);
+        }
+
+        @media (max-width: 992px) {
             .main-nav {
                 display: none;
                 flex-direction: column;
@@ -252,7 +255,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 justify-content: center;
                  padding: 12px 10px;
             }
-
             .menu-toggle {
                 display: flex;
                 align-items: center;
@@ -271,7 +273,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 padding-left: 15px;
                 padding-right: 15px;
             }
-            .app-header .logo span{
+            .app-header .logo span {
                  display: none;
             }
             .main-nav a {
@@ -301,10 +303,7 @@ if (session_status() == PHP_SESSION_NONE) {
              .user-nav a i {
                 margin-right: 3px;
             }
-            .user-nav .fa-caret-down{
-                display: none;
-            }
-             .user-nav .profile-icon + .sr-only + .fa-caret-down {
+            .user-nav .fa-caret-down {
                 display: none;
             }
         }
@@ -312,136 +311,66 @@ if (session_status() == PHP_SESSION_NONE) {
 </head>
 <body>
 
-    <header class="app-header">
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
-            <i class="fas fa-bars"></i>
-        </button>
 
-        <div class="logo">
-            <a href="../index.php"><i class="fas fa-church"></i> <span>Permata GBKP</span></a>
-        </div>
-
-        <nav class="main-nav" id="mainNav">
-            <ul>
-                <li><a href="../Pendataan_jemaat/index.php"><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
-                <li><a href="../Donasi/index.php"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
-                <li><a href="#organisasi"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
-                <li><a href="../Contact_us/index.php"><i class="fas fa-link"></i> Stay Connected</a></li>
-            </ul>
-        </nav>
-
-        <nav class="user-nav">
-            <ul>
-                <li class="dropdown">
-                    <a href="#" class="language-switcher" onclick="return false;" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-globe"></i> <span>Bahasa</span> <i class="fas fa-caret-down"></i>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="?lang=id">Indonesia</a>
-                        <a href="?lang=en">English</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#notifikasi" aria-label="Notifikasi">
-                        <i class="fas fa-bell"></i> <span class="sr-only">Notifikasi</span>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" onclick="return false;" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle profile-icon"></i> <span class="sr-only">Profil Pengguna</span> <i class="fas fa-caret-down"></i>
-                    </a>
-                     <div class="dropdown-content">
-                        <div class="username-display">
-                            <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
-                        </div>
-                        <a href="../register.php">register</a>
-                        <a href="../login.php">Login</a>
-                        <a href="../logout.php">Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    </header>
 
     <div class="main-content-area">
         <div class="container main-container">
-            <div class="profile-card">
+            <div class="contact-card">
                 <div class="card-body p-4 p-md-5">
-
                     <div class="d-flex align-items-center mb-4">
                         <div class="bg-primary-icon rounded-circle d-flex align-items-center justify-content-center me-3"
                              style="width: 60px; height: 60px;">
-                            <i class="fas fa-info-circle fa-lg text-white"></i>
+                            <i class="fas fa-headset fa-lg text-white"></i>
                         </div>
                         <div>
-                            <h3 class="mb-1">Tentang Gereja Batak Karo Protestan (GBKP)</h3>
-                            <p class="text-muted mb-0">Sejarah, Kepemimpinan, dan Statistik</p>
+                            <h3 class="mb-1">Hubungi Kami</h3>
+                            <p class="text-muted mb-0">Kirim pesan atau temukan kami di sini</p>
                         </div>
                     </div>
 
-                    <hr class="my-4">
-
-                    <h4 class="mb-3">Sejarah Singkat</h4>
-                    <p>Gereja Batak Karo Protestan (GBKP) adalah sebuah gereja Kristen Protestan beraliran Calvinis di kalangan masyarakat Batak Karo. Gereja ini lahir sebagai hasil pekabaran Injil dari Nederlandsch Zendeling Genootschap (NZG) dari Belanda. Secara resmi, GBKP berdiri pada tanggal 18 April 1890.</p>
-                    <p>Pada awalnya, organisasi ini bernama "Gereja-Gereja Karo" dan kemudian secara resmi menjadi GBKP melalui Sidang Sinode I pada tahun 1941. GBKP berpusat di Kabanjahe, Kabupaten Karo, Sumatera Utara.</p>
-
-                    <h4 class="mt-5 mb-3">Statistik Gereja (Data 2023)</h4>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <div class="statistic-item">
-                                <i class="fas fa-users stat-icon"></i>
-                                <div class="stat-number">306.174</div>
-                                <div class="stat-label">Jumlah Jemaat</div>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <h5 class="mb-3">Informasi Kontak</h5>
+                            <div class="contact-info-item">
+                                <i class="fas fa-map-marker-alt me-3"></i>
+                                <span>Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226</span>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-phone-alt me-3"></i>
+                                <span>083171752088 (Loren)
+                                     <br> 082132281003 (Eginta)</span>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-envelope me-3"></i>
+                                <span>kontak@permatagbkp.org</span>
+                            </div>
+                            <div class="mt-4">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7915.243375410588!2d112.68013549357909!3d-7.283812899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fd004cb06ecf%3A0x1a1e4a50b18e6182!2sGBKP%20Runggun%20Surabaya!5e0!3m2!1sen!2sid!4v1749183183111!5m2!1sen!2sid" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="statistic-item">
-                                <i class="fas fa-church stat-icon"></i>
-                                <div class="stat-number">1.023</div>
-                                <div class="stat-label">Gereja / Runggun</div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="statistic-item">
-                                <i class="fas fa-map-marked-alt stat-icon"></i>
-                                <div class="stat-number">31</div>
-                                <div class="stat-label">Klasis (Distrik)</div>
-                            </div>
+                        <div class="col-lg-6">
+                            <h5 class="mb-3">Kirim Pesan</h5>
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="contactName" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="contactName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Alamat Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactMessage" class="form-label">Pesan Anda</label>
+                                    <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                    <h4 class="mt-5 mb-3">Pimpinan Moderamen (Periode 2020-2025)</h4>
-                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Ketua Umum
-                            <span class="fw-bold">Pdt. Krismas Imanta Barus, M.Th, L.M.</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Sekretaris Umum
-                            <span class="fw-bold">Pdt. Yunus Bangun, M.Th.</span>
-                        </li>
-                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Bendahara Umum
-                            <span class="fw-bold">Pt. Mulia Perangin-angin, S.E.</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Kabid. Pert testemunian
-                            <span class="fw-bold">Pdt. Yusuf Tarigan, S.Th, M.M.</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Kabid. Koinonia
-                            <span class="fw-bold">Pdt. Jenny Eva Karosekali, S.Th, M.M.</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Kabid. Diakonia
-                            <span class="fw-bold">Pdt. Mestika Nan-guna Ginting, S.Th, M.Psi.</span>
-                        </li>
-                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Wakil Sekretaris Umum
-                            <span class="fw-bold">Pdt. Endang Terkelin Tarigan, M.Th.</span>
-                        </li>
-                    </ul>
-
                 </div>
             </div>
         </div>
@@ -449,7 +378,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // --- Script untuk Header (Menu Toggle) ---
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
 
@@ -460,6 +388,13 @@ if (session_status() == PHP_SESSION_NONE) {
                 menuToggle.setAttribute('aria-expanded', isExpanded);
             });
         }
+        
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Pesan Anda telah terkirim.');
+            this.reset();
+        });
+
     </script>
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-// Mulai session jika belum dimulai (diperlukan untuk $_SESSION['username'])
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -11,40 +10,37 @@ if (session_status() == PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donasi - Pembayaran</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* Root variables */
         :root {
-            --text-color: #333; /* Default text color */
+            --text-color: #333;
         }
 
-        /* Global Body Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background: linear-gradient(to right, #002366, lightcoral); /* Gradient background */
+            background: linear-gradient(to right, #002366, lightcoral);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
             min-height: 100vh;
-            padding-top: 70px; /* Space for the fixed header - adjust if header height changes */
+            padding-top: 70px;
         }
 
-        /* --- Styling Header --- */
+
         .app-header {
             background-color: #333;
-            padding: 0 20px; /* Adjusted padding */
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
-            position: fixed; /* Header fixed at the top */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            height: 60px; /* Explicit height for header */
+            height: 60px;
         }
 
         .app-header .logo {
@@ -60,7 +56,7 @@ if (session_status() == PHP_SESSION_NONE) {
         .app-header .logo a i {
             margin-right: 8px;
         }
-        .app-header .logo span { /* To control visibility of logo text */
+        .app-header .logo span {
             display: inline-block;
         }
 
@@ -71,12 +67,12 @@ if (session_status() == PHP_SESSION_NONE) {
             margin: 0;
             display: flex;
             align-items: center;
-            height: 100%; /* Ensure nav items can align center vertically if needed */
+            height: 100%;
         }
 
         .main-nav li, .user-nav li {
             margin-left: 15px;
-            display: flex; /* For vertical alignment of link content */
+            display: flex;
             align-items: center;
         }
 
@@ -110,24 +106,24 @@ if (session_status() == PHP_SESSION_NONE) {
             margin-left: 4px;
         }
 
-        .dropdown { /* For header dropdowns */
+        .dropdown {
             position: relative;
             display: inline-block;
         }
 
-        .dropdown-content { /* For header dropdowns */
+        .dropdown-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 170px; /* Adjusted width */
+            min-width: 170px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1001; /* Ensure dropdown is above other content */
+            z-index: 1001;
             border-radius: 5px;
             right: 0;
-            top: 100%; /* Position below the parent */
+            top: 100%;
         }
 
-        .dropdown-content a, .dropdown-content div.username-display { /* For header dropdowns */
+        .dropdown-content a, .dropdown-content div.username-display {
             color: black;
             padding: 10px 14px;
             text-decoration: none;
@@ -153,7 +149,7 @@ if (session_status() == PHP_SESSION_NONE) {
             display: block;
         }
 
-        .sr-only { /* Accessibility helper */
+        .sr-only {
             position: absolute;
             width: 1px;
             height: 1px;
@@ -165,24 +161,23 @@ if (session_status() == PHP_SESSION_NONE) {
             border: 0;
         }
 
-        .menu-toggle { /* Hamburger menu button */
+        .menu-toggle {
             display: none;
             background: none;
             border: none;
             color: white;
             font-size: 1.5em;
             cursor: pointer;
-            padding: 0 10px; /* Add some padding */
+            padding: 0 10px;
         }
 
-        /* --- Styling Konten (Payment Card & Lainnya) --- */
-        .main-content-area { /* Wrapper for content below header */
-            padding: 20px; /* Padding for the content area */
+        .main-content-area {
+            padding: 20px;
         }
-        .main-container { /* For the payment card */
+        .main-container {
             width: 100%;
             max-width: 700px;
-            margin: 0 auto; /* Center the payment card container */
+            margin: 0 auto;
         }
 
         .profile-card {
@@ -222,7 +217,7 @@ if (session_status() == PHP_SESSION_NONE) {
             background-color: rgba(0, 35, 102, 0.1);
         }
 
-        .btn-primary { /* Payment button */
+        .btn-primary {
             background: linear-gradient(135deg, #002366 0%, #003399 100%);
             border: none;
             border-radius: 25px;
@@ -237,7 +232,7 @@ if (session_status() == PHP_SESSION_NONE) {
             box-shadow: 0 4px 15px rgba(0, 35, 102, 0.3);
         }
 
-        .alert-success { /* Generic success message for payment */
+        .alert-success {
             background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(25, 135, 84, 0.1) 100%);
             border: 1px solid rgba(40, 167, 69, 0.2);
             color: #155724;
@@ -245,96 +240,91 @@ if (session_status() == PHP_SESSION_NONE) {
         .alert-success i {
             color: inherit;
         }
-         .profile-card .bg-primary-icon { /* Custom class for the icon background in payment card header */
+         .profile-card .bg-primary-icon {
             background-color: #002366 !important;
         }
 
-        /* --- Responsif --- */
-        @media (max-width: 992px) { /* Tablet and below */
-            .main-nav { /* Mobile navigation */
-                display: none; /* Hidden by default */
+        @media (max-width: 992px) {
+            .main-nav {
+                display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 60px; /* Position below the fixed header */
+                top: 60px;
                 left: 0;
                 width: 100%;
-                background-color: #333; /* Same as header */
+                background-color: #333;
                 padding: 10px 0;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add shadow for better separation */
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             }
-            .main-nav.active { /* Class to show the nav */
+            .main-nav.active {
                 display: flex;
             }
             .main-nav li {
                 margin: 10px 20px;
-                width: calc(100% - 40px); /* Full width items */
+                width: calc(100% - 40px);
             }
             .main-nav a {
-                justify-content: center; /* Center text and icon */
-                 padding: 12px 10px; /* Larger tap target */
+                justify-content: center;
+                 padding: 12px 10px;
             }
 
-            .menu-toggle { /* Show hamburger */
-                display: flex; /* Use flex to align icon */
+            .menu-toggle {
+                display: flex;
                 align-items: center;
-                order: -1; /* Move to the far left */
+                order: -1;
             }
-            .app-header .logo { /* Center logo between hamburger and user nav */
-                /* position: absolute;
-                left: 50%;
-                transform: translateX(-50%); */
-                margin: 0 auto; /* Auto margins for centering between flex items */
-                padding-left: 40px; /* Space for hamburger */
-                padding-right: 40px; /* Space for user-nav potential width */
+            .app-header .logo {
+                margin: 0 auto;
+                padding-left: 40px;
+                padding-right: 40px;
             }
-             .user-nav { /* User nav pushed to the right */
-                /* margin-left: auto; */ /* Let flexbox handle it */
+             .user-nav {
             }
         }
 
-         @media (max-width: 768px) { /* Mobile */
+         @media (max-width: 768px) {
             .app-header .logo {
                 font-size: 1.1em;
                 padding-left: 15px;
                 padding-right: 15px;
             }
-            .app-header .logo span{ /* Hide text part of logo on small screens */
+            .app-header .logo span{
                  display: none;
             }
             .main-nav a {
                 font-size: 0.9em;
             }
              .user-nav li {
-                margin-left: 8px; /* Reduce margin */
+                margin-left: 8px;
             }
             .user-nav a {
                 font-size: 0.8em;
                 padding: 6px 8px;
             }
-             .user-nav .language-switcher span { /* Hide "Bahasa" text */
+             .user-nav .language-switcher span {
                 display: none;
             }
             .payment-option {
                 padding: 15px;
             }
         }
-         @media (max-width: 480px) { /* Very small screens */
+         @media (max-width: 480px) {
             .app-header .logo {
-                 display: none; /* Hide logo entirely if too cluttered */
+                 display: none;
             }
             .menu-toggle {
-                 margin-right: auto; /* Push toggle to left if logo is gone */
+                 margin-right: auto;
             }
              .user-nav a {
-                padding: 5px; /* Smaller padding */
+                padding: 5px;
             }
              .user-nav a i {
                 margin-right: 3px;
             }
             .user-nav .fa-caret-down{
-                display: none; /* Hide caret on very small screens */
+                display: none;
             }
-             .user-nav .profile-icon + .sr-only + .fa-caret-down { /* More specific selector if needed */
+             .user-nav .profile-icon + .sr-only + .fa-caret-down {
                 display: none;
             }
         }
@@ -349,13 +339,11 @@ if (session_status() == PHP_SESSION_NONE) {
         </button>
 
         <div class="logo">
-            <!-- Assuming index.php is in the root of your project or FP-PEMWEB-H2 -->
             <a href="../index.php"><i class="fas fa-church"></i> <span>Permata GBKP</span></a>
         </div>
 
         <nav class="main-nav" id="mainNav">
             <ul>
-                <!-- Adjust href paths based on your actual file structure -->
                 <li><a href=../Pendataan_jemaat/index.php><i class="fas fa-users"></i> Pendataan Jemaat</a></li>
                 <li><a href="#donasi"><i class="fas fa-hand-holding-heart"></i> Donasi & Perpuluhan</a></li>
                 <li><a href="../Organisasi/index.php"><i class="fas fa-sitemap"></i> Organisasi Gereja</a></li>
@@ -383,12 +371,10 @@ if (session_status() == PHP_SESSION_NONE) {
                     <a href="#" onclick="return false;" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user-circle profile-icon"></i> <span class="sr-only">Profil Pengguna</span> <i class="fas fa-caret-down"></i>
                     </a>
-                     <div class="dropdown-content">
+                    <div class="dropdown-content">
                         <div class="username-display">
                             <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
                         </div>
-                        <a href="../register.php">register</a>
-                        <a href="../login.php">Login</a>
                         <a href="../logout.php">Logout</a>
                     </div>
                 </li>
@@ -412,7 +398,6 @@ if (session_status() == PHP_SESSION_NONE) {
                     </div>
 
                     <div id="paymentMethodsContainer" class="mb-4">
-                        <!-- Payment methods will be loaded here by JavaScript -->
                     </div>
 
                     <div id="genericSuccessAlert" class="alert alert-success d-none mb-4">
@@ -432,7 +417,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // --- Script untuk Header (Menu Toggle) ---
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
 
@@ -444,7 +428,6 @@ if (session_status() == PHP_SESSION_NONE) {
             });
         }
 
-        // --- Script untuk Konten (Payment Card) ---
         let selectedPaymentMethod = null;
 
         function loadPaymentMethods() {
@@ -461,8 +444,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 { name: 'Virtual Account Mandiri', icon: 'fa-credit-card', details: 'VA: 1728216177' },
                 { name: 'QRIS', icon: 'fa-wallet', details: 'Scan QR Code yang tersedia' },
                 { name: 'GoPay', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi GoPay' },
-                //{ name: 'OVO', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi OVO' },
-                //{ name: 'DANA', icon: 'fa-mobile-alt', details: 'Bayar melalui aplikasi DANA' }
             ];
 
             const row = document.createElement('div');
@@ -532,7 +513,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     }
                     if (payButton) {
                          payButton.innerHTML = '<i class="fas fa-shield-alt me-2"></i>Proses Pembayaran';
-                         payButton.disabled = true; // Keep disabled until new selection
+                         payButton.disabled = true; 
                     }
                 }, 4000);
 

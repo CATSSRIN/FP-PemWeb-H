@@ -6,8 +6,7 @@ $cards = [
         'type' => 'image',
         'img_src' => 'asset/gedung1.jpg',
         'img_alt' => 'Gedung 1',
-        'leader' => 'https://www.instagram.com/permatargsurabaya',
-        'title' => 'Gereja Batak Karo Protestan (GBKP)',
+        'title' => 'GBKP Runggun Surabaya',
         'location' => 'Jl. Mayjen HR. Muhammad No.275, Pradahkalikendal, Kec. Dukuhpakis, Surabaya, Jawa Timur 60226',
         'url' => 'permata_crud/index.php',
         'provinsi' => 'jatim'
@@ -16,7 +15,6 @@ $cards = [
         'type' => 'image',
         'img_src' => 'asset/gedung2.jpg',
         'img_alt' => 'Gedung 2',
-        'leader' => 'https://www.instagram.com/permatasemarang/',
         'title' => 'GBKP Runggun Semarang',
         'location' => 'Jl. Semeru Dalam I No.5, Karangrejo, Kec. Gajahmungkur, Kota Semarang, Jawa Tengah 50231',
         'url' => 'permata_crud2/index.php',
@@ -26,7 +24,6 @@ $cards = [
         'type' => 'image',
         'img_src' => 'asset/gedung3.jpg',
         'img_alt' => 'Gedung 3',
-        'leader' => 'https://www.instagram.com/permatacijantung/',
         'title' => 'GBKP Runggun Cijantung',
         'location' => 'RT.1/RW.2, Cijantung, Pasar Rebo, East Jakarta City, Jakarta 13770',
         'url' => 'permata_crud3/index.php',
@@ -57,21 +54,11 @@ $cards = [
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-<body class="">
-    <link rel="stylesheet" href="styled.css">
-    <script>
-        function toggleProfileMenu() {
-            var menu = document.getElementById('profileMenu');
-            if (menu.style.display === 'block') {
-                menu.style.display = 'none';
-            } else {
-                menu.style.display = 'block';
-            }
-        }
-    </script>
-    </header>
+<body>
+    <link rel="stylesheet" href="style.css">
 
-    <h1 style="color: #fff; margin-left: 20px;">Daftar GBKP</h1>
+    <h1 style="color: #fff; margin-left: 20px; margin-top: 100px; justify-content: center;">
+        Daftar Gereja</h1>
     <nav class="filter-buttons" style="margin-top: 10px;">
         <div class="dropdown">
             <button class="filter-btn" onclick="toggleDropdown('jatim-dropdown')">
@@ -98,21 +85,22 @@ $cards = [
             ?>
             <div class="item-card" data-provinsi="<?= htmlspecialchars($card['provinsi']); ?>">
                 <div class="card-image-placeholder">
-                    <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
-                        <img src="<?php echo htmlspecialchars($card['img_src']); ?>"
-                            alt="<?php echo htmlspecialchars($card['img_alt']); ?>">
-                    <?php elseif ($card['type'] === 'placeholder'): ?>
-                        <i class="fas fa-image image-icon"></i>
-                        <?php if (!empty($card['placeholder_leader'])): ?>
-                            <div class="price-tag">
-                                <?php if (!empty($card['placeholder_leader_prefix'])): ?>
-                                    <span><?php echo htmlspecialchars($card['placeholder_leader_prefix']); ?></span>
-                                <?php endif; ?>
-                                <?php echo htmlspecialchars($card['placeholder_leader']); ?>
-                            </div>
+                    <ul>
+                        <?php if ($card['type'] === 'image' && !empty($card['img_src'])): ?>
+                            <img src="<?php echo htmlspecialchars($card['img_src']); ?>"
+                                alt="<?php echo htmlspecialchars($card['img_alt']); ?>">
+                        <?php elseif ($card['type'] === 'placeholder'): ?>
+                            <i class="fas fa-image image-icon"></i>
+                            <?php if (!empty($card['placeholder_leader'])): ?>
+                                <div class="price-tag">
+                                    <?php if (!empty($card['placeholder_leader_prefix'])): ?>
+                                        <span><?php echo htmlspecialchars($card['placeholder_leader_prefix']); ?></span>
+                                    <?php endif; ?>
+                                    <?php echo htmlspecialchars($card['placeholder_leader']); ?>
+                                </div>
+                            <?php endif; ?>
                         <?php endif; ?>
-                    <?php endif; ?>
-                    <div class="bookmark-icon"><i class="far fa-bookmark"></i></div>
+                    </ul>
                 </div>
                 <div class="card-content">
                     <?php if ($card['type'] === 'image' && !empty($card['leader'])): ?>
@@ -126,7 +114,6 @@ $cards = [
             </div>
             <?php
             if ($isClickable) {
-
                 echo '</a>';
             }
             ?>
@@ -138,7 +125,6 @@ $cards = [
     <script>
         function selectDropdownItem(button, provinsi) {
             const allCards = document.querySelectorAll('.item-card');
-
             allCards.forEach(card => {
                 const cardProvinsi = card.getAttribute('data-provinsi');
                 if (provinsi === 'all' || cardProvinsi === provinsi) {
@@ -147,8 +133,6 @@ $cards = [
                     card.style.display = 'none';
                 }
             });
-
-            // Opsional: Highlight tombol terpilih
             const items = document.querySelectorAll('.dropdown-item');
             items.forEach(item => item.classList.remove('selected'));
             button.classList.add('selected');
@@ -159,12 +143,21 @@ $cards = [
             dropdown.classList.toggle('show');
         }
 
-        // Optional close when clicking outside
-        window.onclick = function(e) {
+        window.onclick = function (e) {
             if (!e.target.matches('.filter-btn')) {
                 document.querySelectorAll('.dropdown-content').forEach(d => d.classList.remove('show'));
             }
         };
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', function () {
+                mainNav.classList.toggle('active');
+                const isExpanded = mainNav.classList.contains('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+            });
+        }
     </script>
 
 </body>

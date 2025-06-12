@@ -1,38 +1,41 @@
 <?php
-// Mulai session jika belum dimulai (diperlukan untuk $_SESSION['username'])
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+}
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('Location: login.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Permata GBKP</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* Root variables */
         :root {
             --text-color: #333;
             --primary-color: #002366;
             --secondary-color: #f8f9fa;
         }
 
-        /* Global Body Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             background: linear-gradient(to right, var(--primary-color), lightcoral);
             color: var(--text-color);
             min-height: 100vh;
-            padding-top: 60px; /* Space for the fixed header */
+            padding-top: 60px;
         }
 
-        /* --- Styling Header (Sama seperti halaman lain) --- */
         .app-header {
             background-color: #333;
             padding: 0 20px;
@@ -47,18 +50,96 @@ if (session_status() == PHP_SESSION_NONE) {
             z-index: 1000;
             height: 60px;
         }
-        .app-header .logo a { color: white; text-decoration: none; display: flex; align-items: center; }
-        .app-header .logo a i { margin-right: 8px; }
-        .main-nav ul, .user-nav ul { list-style: none; padding: 0; margin: 0; display: flex; align-items: center; }
-        .main-nav li, .user-nav li { margin-left: 15px; }
-        .main-nav a, .user-nav a { color: white; text-decoration: none; display: flex; align-items: center; font-size: 0.85em; padding: 8px 10px; border-radius: 5px; transition: background-color 0.3s ease; }
-        .main-nav a:hover, .user-nav a:hover { background-color: #555; }
-        .main-nav a i, .user-nav a i { margin-right: 6px; }
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; background-color: #f9f9f9; min-width: 170px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); z-index: 1001; border-radius: 5px; right: 0; top: 100%; }
-        .dropdown-content a, .dropdown-content div { color: black; padding: 10px 14px; text-decoration: none; display: block; font-size: 0.9em; border-bottom: 1px solid #eee; }
-        .dropdown:hover .dropdown-content { display: block; }
-        .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5em; cursor: pointer; }
+
+        .app-header .logo a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .app-header .logo a i {
+            margin-right: 8px;
+        }
+
+        .main-nav ul,
+        .user-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav li,
+        .user-nav li {
+            margin-left: 15px;
+        }
+
+        .main-nav a,
+        .user-nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 0.85em;
+            padding: 8px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .main-nav a:hover,
+        .user-nav a:hover {
+            background-color: #555;
+        }
+
+        .main-nav a i,
+        .user-nav a i {
+            margin-right: 6px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 170px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            border-radius: 5px;
+            right: 0;
+            top: 100%;
+        }
+
+        .dropdown-content a,
+        .dropdown-content div {
+            color: black;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9em;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
 
 
         /* --- Styling Konten Dashboard --- */
@@ -83,7 +164,7 @@ if (session_status() == PHP_SESSION_NONE) {
             padding: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .summary-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
@@ -99,11 +180,22 @@ if (session_status() == PHP_SESSION_NONE) {
             margin-right: 20px;
             color: white;
         }
-        
-        .summary-card .icon.bg-donasi { background-color: #28a745; }
-        .summary-card .icon.bg-jemaat { background-color: #17a2b8; }
-        .summary-card .icon.bg-kegiatan { background-color: #ffc107; }
-        .summary-card .icon.bg-user { background-color: #dc3545; }
+
+        .summary-card .icon.bg-donasi {
+            background-color: #28a745;
+        }
+
+        .summary-card .icon.bg-jemaat {
+            background-color: #17a2b8;
+        }
+
+        .summary-card .icon.bg-kegiatan {
+            background-color: #ffc107;
+        }
+
+        .summary-card .icon.bg-user {
+            background-color: #dc3545;
+        }
 
         .summary-card .info .number {
             font-size: 2rem;
@@ -124,7 +216,7 @@ if (session_status() == PHP_SESSION_NONE) {
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }
-        
+
         .dashboard-card-header h5 {
             margin: 0;
             font-weight: bold;
@@ -139,7 +231,7 @@ if (session_status() == PHP_SESSION_NONE) {
             border-collapse: separate;
             border-spacing: 0 10px;
         }
-        
+
         .table thead th {
             color: #6c757d;
             border: none;
@@ -148,34 +240,57 @@ if (session_status() == PHP_SESSION_NONE) {
 
         .table tbody tr {
             background-color: var(--secondary-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
         }
-        
-        .table td, .table th {
+
+        .table td,
+        .table th {
             border-top: none;
             padding: 15px;
             vertical-align: middle;
         }
 
-        .table tbody tr td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
-        .table tbody tr td:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+        .table tbody tr td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .table tbody tr td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
 
         .badge {
             padding: 8px 12px;
             font-size: 0.8em;
             border-radius: 20px;
         }
-        
+
         /* --- Responsif --- */
         @media (max-width: 992px) {
-            .main-nav { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background-color: #333; }
-            .main-nav.active { display: flex; }
-            .menu-toggle { display: block; order: -1; }
-        }
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #333;
+            }
 
+            .main-nav.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                order: -1;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <header class="app-header">
@@ -199,7 +314,8 @@ if (session_status() == PHP_SESSION_NONE) {
         <nav class="user-nav">
             <ul>
                 <li class="dropdown">
-                    <a href="#" class="language-switcher"><i class="fas fa-globe"></i> <span>Bahasa</span> <i class="fas fa-caret-down"></i></a>
+                    <a href="#" class="language-switcher"><i class="fas fa-globe"></i> <span>Bahasa</span> <i
+                            class="fas fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Indonesia</a>
                         <a href="#">English</a>
@@ -212,8 +328,6 @@ if (session_status() == PHP_SESSION_NONE) {
                         <div class="username-display p-2">
                             <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest'; ?>
                         </div>
-                        <a href="register.php">register</a>
-                        <a href="login.php">Login</a>
                         <a href="logout.php">Logout</a>
                     </div>
                 </li>
@@ -286,28 +400,32 @@ if (session_status() == PHP_SESSION_NONE) {
                                         <td>05 Juni 2025</td>
                                         <td>Rp 500.000</td>
                                         <td>Transfer BNI</td>
-                                        <td><span class="badge bg-success-subtle text-success-emphasis">Berhasil</span></td>
+                                        <td><span class="badge bg-success-subtle text-success-emphasis">Berhasil</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Anonymous</td>
                                         <td>04 Juni 2025</td>
                                         <td>Rp 250.000</td>
                                         <td>QRIS</td>
-                                        <td><span class="badge bg-success-subtle text-success-emphasis">Berhasil</span></td>
+                                        <td><span class="badge bg-success-subtle text-success-emphasis">Berhasil</span>
+                                        </td>
                                     </tr>
-                                     <tr>
+                                    <tr>
                                         <td>Maria Garcia</td>
                                         <td>03 Juni 2025</td>
                                         <td>Rp 1.000.000</td>
                                         <td>Virtual Account</td>
-                                        <td><span class="badge bg-warning-subtle text-warning-emphasis">Pending</span></td>
+                                        <td><span class="badge bg-warning-subtle text-warning-emphasis">Pending</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Johnathan Chen</td>
                                         <td>02 Juni 2025</td>
                                         <td>Rp 75.000</td>
                                         <td>GoPay</td>
-                                        <td><span class="badge bg-success-subtle text-success-emphasis">Berhasil</span></td>
+                                        <td><span class="badge bg-success-subtle text-success-emphasis">Berhasil</span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -328,8 +446,8 @@ if (session_status() == PHP_SESSION_NONE) {
     </div>
 
     <script>
-  
-        document.getElementById('menuToggle').addEventListener('click', function() {
+
+        document.getElementById('menuToggle').addEventListener('click', function () {
             document.getElementById('mainNav').classList.toggle('active');
         });
 
@@ -359,7 +477,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     },
                     tooltip: {
                         callbacks: {
-                            label: function(context) {
+                            label: function (context) {
                                 let label = context.label || '';
                                 if (label) {
                                     label += ': ';
@@ -377,4 +495,5 @@ if (session_status() == PHP_SESSION_NONE) {
     </script>
 
 </body>
+
 </html>

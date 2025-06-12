@@ -1,8 +1,4 @@
-/* style.css */
-
-/* Define Color Variables */
 :root {
-  /* Light Mode (Default) */
   --bg-color: #f8f9fa;
   --card-bg-color: #ffffff;
   --text-color: #333;
@@ -33,19 +29,13 @@
 }
 
 body.dark-mode {
-  /* Dark Mode */
   --bg-color: #121212;
-  /* Very dark grey, common for dark modes */
   --card-bg-color: #1e1e1e;
-  /* Darker grey for cards */
   --text-color: #e0e0e0;
-  /* Light grey for text */
   --secondary-text-color: #a0a0a0;
-  /* Slightly darker light grey */
   --icon-color: #b0b0b0;
   --placeholder-icon-color: #777;
   --border-color: #333;
-  /* Darker borders */
   --button-bg-color: #2c2c2c;
   --button-border-color: #444;
   --button-text-color: #e0e0e0;
@@ -59,30 +49,23 @@ body.dark-mode {
       255,
       255,
       0.15);
-  /* Lighter, semi-transparent for dark mode */
   --bookmark-icon-color: #e0e0e0;
   --price-tag-bg: rgba(0, 0, 0, 0.7);
-  /* Can remain dark, or adjust */
   --price-tag-text-color: #f0f0f0;
   --dropdown-bg: #2c2c2c;
   --dropdown-border: #444;
   --dropdown-shadow: rgba(0, 0, 0, 0.5);
-  /* Darker shadow for dark mode */
   --dropdown-item-hover-bg: #383838;
   --active-filter-bg: #0056b3;
-  /* Slightly darker blue for active filter */
   --active-filter-text: #f0f0f0;
   --active-filter-border: #0056b3;
 }
 
-/* General Body Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: linear-gradient(to right, #002366, lightcoral);
-  /* This line creates the gradient */
   color: var(--text-color);
-  /* Should be using your text color variable */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -92,14 +75,12 @@ body {
   padding: 20px;
 }
 
-/* Header Section: Search Bar and Filter Icon */
 .header-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
   background-color: var(--header-bg-color);
-  /* USE VARIABLE */
   padding: 10px 20px;
   border-radius: 25px;
   transition: background-color 0.3s ease;
@@ -114,7 +95,6 @@ body {
 .search-bar .search-icon {
   margin-right: 10px;
   color: var(--search-icon-color);
-  /* USE VARIABLE */
   transition: color 0.3s ease;
 }
 
@@ -122,17 +102,14 @@ body {
   border: none;
   outline: none;
   background-color: var(--search-input-bg);
-  /* USE VARIABLE */
   font-size: 16px;
   width: 100%;
   color: var(--text-color);
-  /* USE VARIABLE for input text color */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .search-bar input[type="text"]::placeholder {
   color: var(--secondary-text-color);
-  /* USE VARIABLE for placeholder text color */
 }
 
 .filter-icon-wrapper {
@@ -142,27 +119,21 @@ body {
   width: 40px;
   height: 40px;
   border: 1px solid var(--filter-icon-wrapper-border);
-  /* USE VARIABLE */
   border-radius: 50%;
   cursor: pointer;
-  /* MODIFIED: Added background-color to the transition */
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-/* ADD THIS NEW RULE for the hover effect */
 .filter-icon-wrapper:hover {
   background-color: var(--button-hover-bg-color);
-
 }
 
 .filter-icon-wrapper .filter-icon {
   color: var(--icon-color);
-  /* USE VARIABLE */
   font-size: 18px;
   transition: color 0.3s ease;
 }
 
-/* Filter Buttons */
 .filter-buttons {
   margin-bottom: 25px;
   display: flex;
@@ -179,9 +150,7 @@ body {
 
 .filter-btn {
   background-color: var(--button-bg-color);
-  /* USE VARIABLE */
   border: 1px solid var(--button-border-color);
-  /* USE VARIABLE */
   border-radius: 20px;
   padding: 10px 20px;
   font-size: 14px;
@@ -190,18 +159,14 @@ body {
   align-items: center;
   gap: 8px;
   color: var(--button-text-color);
-  /* USE VARIABLE */
   transition: background-color 0.3s ease, border-color 0.3s ease,
     color 0.3s ease;
 }
 
 .filter-btn:hover {
   background-color: var(--button-hover-bg-color);
-  /* USE VARIABLE */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* A more pronounced shadow */
   transform: translateY(-5px);
-  /* Optional: Lifts the card up slightly for a 3D effect */
 }
 
 .filter-btn .fa-chevron-down {
@@ -217,12 +182,9 @@ body {
   display: none;
   position: absolute;
   background-color: var(--dropdown-bg);
-  /* USE VARIABLE */
   min-width: 100%;
   box-shadow: 0px 8px 16px 0px var(--dropdown-shadow);
-  /* USE VARIABLE */
   border: 1px solid var(--dropdown-border);
-  /* USE VARIABLE */
   border-radius: 8px;
   z-index: 10;
   margin-top: 5px;
@@ -233,7 +195,6 @@ body {
 
 .dropdown-item {
   color: var(--text-color);
-  /* USE VARIABLE */
   padding: 10px 15px;
   text-decoration: none;
   display: block;
@@ -252,29 +213,21 @@ body {
 
 .dropdown-item:hover {
   background-color: var(--dropdown-item-hover-bg);
-  /* USE VARIABLE */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* A more pronounced shadow */
   transform: translateY(-5px);
-  /* Optional: Lifts the card up slightly for a 3D effect */
 }
 
 
 .filter-btn.active {
   background-color: var(--active-filter-bg);
-  /* USE VARIABLE */
   color: var(--active-filter-text);
-  /* USE VARIABLE */
   border-color: var(--active-filter-border);
-  /* USE VARIABLE */
 }
 
 .filter-btn.active .fa-chevron-down {
   color: var(--active-filter-text);
-  /* USE VARIABLE */
 }
 
-/* Item Grid */
 .item-grid {
   padding-left: 20px;
   padding-right: 20px;
@@ -283,23 +236,14 @@ body {
   gap: 20px;
 }
 
-/* Item Card Styling */
 .item-card {
   height: 100%;
   width: 100%;
   background-color: var(--card-bg-color);
-  /* USE VARIABLE */
-  /* */
   border: 1px solid var(--border-color);
-  /* USE VARIABLE */
-  /* */
   border-radius: 12px;
-  /* */
   overflow: hidden;
-  /* */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  /* */
-  /* MODIFIED: Added box-shadow and transform to the transition property */
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
@@ -307,62 +251,35 @@ body {
     transform 0.2s ease;
 }
 
-/* ADD THIS NEW RULE */
 .item-card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* A more pronounced shadow */
   transform: translateY(-5px);
-  /* Optional: Lifts the card up slightly for a 3D effect */
 }
 
-/* MODIFIED .card-image-placeholder RULE */
 .card-image-placeholder {
   background-color: var(--image-placeholder-bg);
   width: 100%;
   height: 200px;
   display: flex;
-  /* For centering placeholder icon */
   align-items: center;
-  /* For centering placeholder icon */
   justify-content: center;
-  /* For centering placeholder icon */
   position: relative;
   overflow: hidden;
-  /* To contain the image */
   color: var(--placeholder-icon-color);
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* Removed: object-fit: cover; (incorrect for div) */
-  /* Removed: display: block; (was overriding display: flex) */
 }
 
 .card-image-placeholder .image-icon {
   font-size: 50px;
 }
 
-/* ADDED: Rule for images within the placeholder */
 .card-image-placeholder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Scales image to fill, maintains aspect ratio, crops if needed */
   display: block;
-  /* Good practice for images */
 }
 
-.bookmark-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: var(--bookmark-bg);
-  /* USE VARIABLE */
-  color: var(--bookmark-icon-color);
-  /* USE VARIABLE */
-  padding: 8px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
 
 .bookmark-icon.active-bookmark {
   background-color: var(--bookmark-bg-active, rgba(255, 80, 80, 0.7));
@@ -373,9 +290,7 @@ body {
   bottom: 15px;
   left: 15px;
   background-color: var(--price-tag-bg);
-  /* USE VARIABLE */
   color: var(--price-tag-text-color);
-  /* USE VARIABLE */
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 14px;
@@ -388,26 +303,21 @@ body {
 }
 
 .card-content {
-  /* This class is used for text details */
   padding: 15px;
 }
 
 .item-title {
-  /* This class is used for the main title in text details */
   font-size: 16px;
   font-weight: bold;
   margin-top: 0;
   margin-bottom: 8px;
   color: var(--text-color);
-  /* USE VARIABLE */
   transition: color 0.3s ease;
 }
 
 .item-location {
-  /* This class is used for location text */
   font-size: 14px;
   color: var(--secondary-text-color);
-  /* USE VARIABLE */
   margin-bottom: 0;
   display: flex;
   align-items: center;
@@ -417,8 +327,40 @@ body {
 .item-location .fa-map-marker-alt {
   margin-right: 6px;
   color: var(--icon-color);
-  /* USE VARIABLE */
   transition: color 0.3s ease;
 }
 
-/* REMOVED: Extra closing curly brace that was at the end of the original file */
+.app-header {
+  background-color: #333;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+}
+
+.app-header .logo {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.app-header .logo a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.app-header .logo a i {
+  margin-right: 8px;
+}
+
+.app-header .logo span {
+  display: inline-block;
+}

@@ -17,7 +17,6 @@ if ($cari != '') {
 ?>
 
 <?php
-// Mulai session jika belum dimulai (diperlukan untuk $_SESSION['username'])
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -32,23 +31,19 @@ if (session_status() == PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* Styling Dasar untuk Header */
         body {
-            /* Sebaiknya ini ada di CSS global Anda */
             margin: 0;
             font-family: sans-serif;
         }
 
         .app-header {
             background-color: #333;
-            /* Warna latar belakang header */
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
             position: sticky;
-            /* Membuat header tetap di atas saat scroll */
             top: 0;
             z-index: 1000;
             min-height: 60px;
@@ -116,7 +111,6 @@ if (session_status() == PHP_SESSION_NONE) {
             margin-left: 4px;
         }
 
-        /* Style untuk dropdown sederhana */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -157,7 +151,6 @@ if (session_status() == PHP_SESSION_NONE) {
         }
 
         .sr-only {
-            /* Untuk menyembunyikan teks secara visual tapi tetap aksesibel */
             position: absolute;
             width: 1px;
             height: 1px;
@@ -169,7 +162,6 @@ if (session_status() == PHP_SESSION_NONE) {
             border: 0;
         }
 
-        /* Bagian untuk hamburger menu (disembunyikan di desktop) */
         .menu-toggle {
             display: none;
             background: none;
@@ -179,14 +171,12 @@ if (session_status() == PHP_SESSION_NONE) {
             cursor: pointer;
         }
 
-        /* Responsif untuk Header */
         @media (max-width: 992px) {
             .main-nav {
                 display: none;
                 flex-direction: column;
                 position: absolute;
                 top: 100%;
-                /* Muncul di bawah header, sesuaikan dengan tinggi header */
                 left: 0;
                 width: 100%;
                 background-color: #333;
@@ -234,8 +224,6 @@ if (session_status() == PHP_SESSION_NONE) {
             .app-header .logo {
                 font-size: 1.1em;
             }
-
-            /* Anda bisa menambahkan penyesuaian lebih lanjut untuk user-nav di layar sangat kecil */
         }
     </style>
 </head>

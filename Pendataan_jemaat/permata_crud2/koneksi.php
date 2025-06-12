@@ -4,25 +4,20 @@ $user = "root";
 $pass = "";
 $dbname = "permata_db";
 
-// Koneksi ke MySQL (tanpa pilih database dulu)
 $conn = new mysqli($host, $user, $pass);
 
-// Cek koneksi
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Buat database jika belum ada
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 if ($conn->query($sql) !== TRUE) {
     die("Gagal membuat database: " . $conn->error);
 }
 
-// Pilih database
 $conn->select_db($dbname);
 
-// Buat tabel jemaat jika belum ada
-$sqlTable = "CREATE TABLE IF NOT EXISTS jemaat_semarang (
+$sqlTable = "CREATE TABLE IF NOT EXISTS jemaat (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nama VARCHAR(100) NOT NULL,
     alamat TEXT NOT NULL,
@@ -41,3 +36,4 @@ $sqlUsers = "CREATE TABLE IF NOT EXISTS users (
 if ($conn->query($sqlUsers) !== TRUE) {
     die("Gagal membuat tabel users: " . $conn->error);
 }
+?>
