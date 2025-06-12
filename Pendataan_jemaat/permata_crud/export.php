@@ -6,16 +6,20 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 $result = $conn->query("SELECT * FROM jemaat");
 
 if ($type === 'excel') {
-    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Type: text/csv; charset=UTF-8");
     header("Content-Disposition: attachment; filename=jemaat_export.csv");
-    echo "No\tNama\tAlamat\tTanggal Lahir\tNo Telp\n";
+    // Add UTF-8 BOM for Excel compatibility
+    echo "\xEF\xBB\xBF";
+    // Output CSV header
+    echo "\"No\",\"Nama\",\"Alamat\",\"Tanggal Lahir\",\"No Telp\"\n";
     $no = 1;
     while ($row = $result->fetch_assoc()) {
-        echo $no++ . "\t" .
-            $row['nama'] . "\t" .
-            str_replace(array("\r", "\n"), ' ', $row['alamat']) . "\t" .
-            $row['tanggal_lahir'] . "\t" .
-            $row['no_telepon'] . "\n";
+        echo "\"{$no}\",\""
+            . str_replace('"', '""', $row['nama']) . "\",\""
+            . str_replace('"', '""', str_replace(array("\r", "\n"), ' ', $row['alamat'])) . "\",\""
+            . $row['tanggal_lahir'] . "\",\""
+            . $row['no_telepon'] . "\"\n";
+        $no++;
     }
     exit;
 } elseif ($type === 'pdf') {
